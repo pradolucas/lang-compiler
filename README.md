@@ -6,3 +6,4 @@ Fernanda Sayuri
 Lucas Prado
 Leopoldo Kenji
 João Melques
+Victor Fachini
