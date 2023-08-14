@@ -2,7 +2,7 @@
 Compilador desenvolvido para disciplina Compiladores
 
 ## Desenvolvido por:
-Fernanda Sayuri
-Lucas Prado
-Leopoldo Kenji
-João Melques
+Fernanda Sayuri <br>
+Lucas Prado <br>
+Leopoldo Kenji <br>
+João Melques 
