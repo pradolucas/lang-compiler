@@ -5,4 +5,5 @@ Compilador desenvolvido para disciplina Compiladores
 Fernanda Sayuri <br>
 Lucas Prado <br>
 Leopoldo Kenji <br>
-João Melques 
+João Melques <br>
+Victor Fachini
