@@ -1,3 +1,5 @@
 programa
-	a = 2 * a + b * c / d - 3.14;
-fimprog
+	x := 2 * a + b * c / d - 3.14.
+	
+	se ( 2 >= 3) entao { leia(a)} senao {leia(b)}.
+fimprog.

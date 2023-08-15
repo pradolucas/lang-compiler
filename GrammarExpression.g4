@@ -2,51 +2,89 @@ grammar GrammarExpression;
 
 prog
 :
-	'programa' bloco 'fimprog'
+	'programa' bloco 'fimprog.'
+;
+
+declara
+:
+	'declare' ID
+	(
+		C ID
+	)* P
 ;
 
 bloco
 :
 	(
-		cmd
+		cmd P
 	)+
 ;
 
 cmd
 :
-	cmdLeitura
-	| cmdEscrita
-	| cmdattrib
+	cmdleitura
+	| cmdescrita
+	| cmdexpr
+	| cmdif
 ;
 
-cmdLeitura
+cmdleitura
 :
-	'leia' AP ID FP SC
+	'leia' AP ID FP
 ;
 
-cmdEscrita
+cmdescrita
 :
-	'escreva' AP ID FP SC
+	'escreva' AP
+	(
+		TEXTO
+		| ID
+	) FP
 ;
 
-cmdattrib
+cmdexpr
 :
-	ID ATTR expr SC
+	ID ATTR expr
+;
+
+cmdif
+:
+	'se' AP expr OP_REL expr FP 'entao' AC
+	(
+		cmd
+	)+ FC
+	(
+		'senao' AC
+		(
+			cmd
+		)+ FC
+	)?
 ;
 
 expr
 :
 	termo
 	(
-		OP termo
+		(OP_SUM|OP_SUB) termo
 	)*
 ;
 
 termo
 :
-	ID
-	| NUMBER
+	fator
+	(
+		(OP_MULT|OP_DIV) fator
+	)*
 ;
+
+fator
+:
+	NUMBER
+	| ID
+	| AP expr FC
+;
+
+//---------LEXICO---------
 
 AP
 :
@@ -58,22 +96,87 @@ FP
 	')'
 ;
 
+AC
+:
+	'{'
+;
+
+FC
+:
+	'}'
+;
+
 SC
 :
 	';'
 ;
 
+C
+:
+	','
+;
+
+P
+:
+	'.'
+;
+
+DBQ
+:
+	'"'
+;
+
+OP_SUM
+:
+	'+'
+;
+
+OP_SUB
+:
+	'-'
+;
+
+OP_MULT
+:
+	'*'
+;
+
+OP_DIV
+:
+	'/'
+;
+
 OP
+:
+	OP_S
+	| OP_M
+;
+
+OP_S
 :
 	'+'
 	| '-'
-	| '*'
+;
+
+OP_M
+:
+	'*'
 	| '/'
+;
+
+OP_REL
+:
+	'<'
+	| '>'
+	| '<='
+	| '>='
+	| '!='
+	| '=='
 ;
 
 ATTR
 :
-	'='
+	':='
 ;
 
 ID
@@ -94,6 +197,17 @@ NUMBER
 	)?
 ;
 
+TEXTO
+:
+	DBQ
+	(
+		[0-9]
+		| [a-z]
+		| [A-Z]
+		| ' '
+	)+ DBQ
+;
+
 WS
 :
 	(
@@ -102,4 +216,4 @@ WS
 		| '\n'
 		| '\r'
 	) -> skip
-;	
+;

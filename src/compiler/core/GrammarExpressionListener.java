@@ -18,6 +18,16 @@ public interface GrammarExpressionListener extends ParseTreeListener {
 	 */
 	void exitProg(GrammarExpressionParser.ProgContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#declara}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclara(GrammarExpressionParser.DeclaraContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#declara}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclara(GrammarExpressionParser.DeclaraContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#bloco}.
 	 * @param ctx the parse tree
 	 */
@@ -38,35 +48,45 @@ public interface GrammarExpressionListener extends ParseTreeListener {
 	 */
 	void exitCmd(GrammarExpressionParser.CmdContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdLeitura}.
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdleitura}.
 	 * @param ctx the parse tree
 	 */
-	void enterCmdLeitura(GrammarExpressionParser.CmdLeituraContext ctx);
+	void enterCmdleitura(GrammarExpressionParser.CmdleituraContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdLeitura}.
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdleitura}.
 	 * @param ctx the parse tree
 	 */
-	void exitCmdLeitura(GrammarExpressionParser.CmdLeituraContext ctx);
+	void exitCmdleitura(GrammarExpressionParser.CmdleituraContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdEscrita}.
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdescrita}.
 	 * @param ctx the parse tree
 	 */
-	void enterCmdEscrita(GrammarExpressionParser.CmdEscritaContext ctx);
+	void enterCmdescrita(GrammarExpressionParser.CmdescritaContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdEscrita}.
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdescrita}.
 	 * @param ctx the parse tree
 	 */
-	void exitCmdEscrita(GrammarExpressionParser.CmdEscritaContext ctx);
+	void exitCmdescrita(GrammarExpressionParser.CmdescritaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdattrib}.
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdexpr}.
 	 * @param ctx the parse tree
 	 */
-	void enterCmdattrib(GrammarExpressionParser.CmdattribContext ctx);
+	void enterCmdexpr(GrammarExpressionParser.CmdexprContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdattrib}.
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdexpr}.
 	 * @param ctx the parse tree
 	 */
-	void exitCmdattrib(GrammarExpressionParser.CmdattribContext ctx);
+	void exitCmdexpr(GrammarExpressionParser.CmdexprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdif}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdif(GrammarExpressionParser.CmdifContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdif}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdif(GrammarExpressionParser.CmdifContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#expr}.
 	 * @param ctx the parse tree
@@ -87,4 +107,14 @@ public interface GrammarExpressionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTermo(GrammarExpressionParser.TermoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#fator}.
+	 * @param ctx the parse tree
+	 */
+	void enterFator(GrammarExpressionParser.FatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#fator}.
+	 * @param ctx the parse tree
+	 */
+	void exitFator(GrammarExpressionParser.FatorContext ctx);
 }

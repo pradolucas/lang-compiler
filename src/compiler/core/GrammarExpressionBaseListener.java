@@ -29,6 +29,18 @@ public class GrammarExpressionBaseListener implements GrammarExpressionListener 
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclara(GrammarExpressionParser.DeclaraContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclara(GrammarExpressionParser.DeclaraContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBloco(GrammarExpressionParser.BlocoContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -53,37 +65,49 @@ public class GrammarExpressionBaseListener implements GrammarExpressionListener 
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdLeitura(GrammarExpressionParser.CmdLeituraContext ctx) { }
+	@Override public void enterCmdleitura(GrammarExpressionParser.CmdleituraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdLeitura(GrammarExpressionParser.CmdLeituraContext ctx) { }
+	@Override public void exitCmdleitura(GrammarExpressionParser.CmdleituraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdEscrita(GrammarExpressionParser.CmdEscritaContext ctx) { }
+	@Override public void enterCmdescrita(GrammarExpressionParser.CmdescritaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdEscrita(GrammarExpressionParser.CmdEscritaContext ctx) { }
+	@Override public void exitCmdescrita(GrammarExpressionParser.CmdescritaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdattrib(GrammarExpressionParser.CmdattribContext ctx) { }
+	@Override public void enterCmdexpr(GrammarExpressionParser.CmdexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdattrib(GrammarExpressionParser.CmdattribContext ctx) { }
+	@Override public void exitCmdexpr(GrammarExpressionParser.CmdexprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdif(GrammarExpressionParser.CmdifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdif(GrammarExpressionParser.CmdifContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -108,6 +132,18 @@ public class GrammarExpressionBaseListener implements GrammarExpressionListener 
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTermo(GrammarExpressionParser.TermoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFator(GrammarExpressionParser.FatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFator(GrammarExpressionParser.FatorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
