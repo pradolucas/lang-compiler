@@ -1,5 +1,11 @@
 // Generated from GrammarExpression.g4 by ANTLR 4.13.0
 package compiler.core;
+
+	import symbols.DataType;
+	import symbols.Identifier;
+	import symbols.SymbolTable;
+	import exceptions.SemanticException;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -37,6 +43,16 @@ public interface GrammarExpressionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBloco(GrammarExpressionParser.BlocoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#tipo}.
+	 * @param ctx the parse tree
+	 */
+	void enterTipo(GrammarExpressionParser.TipoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#tipo}.
+	 * @param ctx the parse tree
+	 */
+	void exitTipo(GrammarExpressionParser.TipoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmd}.
 	 * @param ctx the parse tree
@@ -87,6 +103,16 @@ public interface GrammarExpressionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCmdif(GrammarExpressionParser.CmdifContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdwhile}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdwhile(GrammarExpressionParser.CmdwhileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdwhile}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdwhile(GrammarExpressionParser.CmdwhileContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#expr}.
 	 * @param ctx the parse tree

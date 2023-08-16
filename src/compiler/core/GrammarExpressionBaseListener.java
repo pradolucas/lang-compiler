@@ -1,6 +1,12 @@
 // Generated from GrammarExpression.g4 by ANTLR 4.13.0
 package compiler.core;
 
+	import symbols.DataType;
+	import symbols.Identifier;
+	import symbols.SymbolTable;
+	import exceptions.SemanticException;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -48,6 +54,18 @@ public class GrammarExpressionBaseListener implements GrammarExpressionListener 
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBloco(GrammarExpressionParser.BlocoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTipo(GrammarExpressionParser.TipoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTipo(GrammarExpressionParser.TipoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -108,6 +126,18 @@ public class GrammarExpressionBaseListener implements GrammarExpressionListener 
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCmdif(GrammarExpressionParser.CmdifContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdwhile(GrammarExpressionParser.CmdwhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdwhile(GrammarExpressionParser.CmdwhileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,5 +1,22 @@
 programa
-	x := 2 * a + b * c / d - 3.14.
+
+	declare NUMERO x, a, b, c, d.
+	declare STRING txt, l.
+	x := 2.0.
+	b := 3.
 	
-	se ( 2 >= 3) entao { leia(a)} senao {leia(b)}.
+	
+	se ( 2 >= 3) 
+	entao { leia(a)} 
+	senao {escreva(x)}.
+	
+	while ( x > 3 ) {
+		a := 2
+	}.
+	
+	do
+	{
+		a := 2
+	}
+	while ( a > 3 ).
 fimprog.
