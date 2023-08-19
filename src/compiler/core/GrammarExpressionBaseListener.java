@@ -9,6 +9,7 @@ package compiler.core;
 	import abstract_syntax_tree.AbstractCommand;
 	import abstract_syntax_tree.CommandLeitura;
 	import abstract_syntax_tree.CommandEscrita;
+	import abstract_syntax_tree.CommandAtribuicao;
 	import java.util.ArrayList;
 
 

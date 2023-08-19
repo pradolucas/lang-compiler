@@ -8,6 +8,7 @@
 	import abstract_syntax_tree.AbstractCommand;
 	import abstract_syntax_tree.CommandLeitura;
 	import abstract_syntax_tree.CommandEscrita;
+	import abstract_syntax_tree.CommandAtribuicao;
 	import java.util.ArrayList;
 
 import org.antlr.v4.runtime.Lexer;
@@ -108,6 +109,9 @@ public class GrammarExpressionLexer extends Lexer {
 
 		private String _readID;
 		private String _writeID;
+		private String _exprID;
+		private String _exprContent;
+
 		
 		
 		public String lastToken(){
@@ -159,6 +163,17 @@ public class GrammarExpressionLexer extends Lexer {
 			_writeID = lastToken();
 			CommandEscrita cmd = new CommandEscrita(_writeID);
 			curThread.add(cmd);
+		}
+
+		public void exprAtribuicao(){
+			_exprID = lastToken();
+			_exprContent = "";
+			CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
+			curThread.add(cmd);
+		}
+
+		public void inputTermo(){
+			_exprContent += lastToken();
 		}
 
 		public void exibeComandos(){

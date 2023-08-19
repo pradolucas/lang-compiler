@@ -9,6 +9,7 @@ grammar GrammarExpression;
 	import abstract_syntax_tree.AbstractCommand;
 	import abstract_syntax_tree.CommandLeitura;
 	import abstract_syntax_tree.CommandEscrita;
+	import abstract_syntax_tree.CommandAtribuicao;
 	import java.util.ArrayList;
 }
 
@@ -21,6 +22,9 @@ grammar GrammarExpression;
 
 	private String _readID;
 	private String _writeID;
+	private String _exprID;
+	private String _exprContent;
+
 	
 	
 	public String lastToken(){
@@ -72,6 +76,17 @@ grammar GrammarExpression;
 		_writeID = lastToken();
 		CommandEscrita cmd = new CommandEscrita(_writeID);
 		curThread.add(cmd);
+	}
+
+	public void exprAtribuicao(){
+		_exprID = lastToken();
+		_exprContent = "";
+		CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
+		curThread.add(cmd);
+	}
+
+	public void inputTermo(){
+		_exprContent += lastToken();
 	}
 
 	public void exibeComandos(){
@@ -158,6 +173,7 @@ cmdexpr
 	ID
 	{checkIdExists();
 		idAttr = lastToken();
+		exprAtribuicao();
 	}
 
 	ATTR expr
@@ -198,6 +214,7 @@ expr
 		(
 			OP_SUM
 			| OP_SUB
+			{inputTermo();}
 		) termo
 	)*
 ;
@@ -209,6 +226,7 @@ termo
 		(
 			OP_MULT
 			| OP_DIV
+			{inputTermo();}
 		) fator
 	)*
 ;
@@ -217,7 +235,7 @@ fator
 :
 	NUMBER
 	| ID
-	{checkIdExists(); checkInitialized();}
+	{checkIdExists(); checkInitialized(); inputTermo();}
 
 	| AP expr FC
 ;
