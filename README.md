@@ -6,7 +6,7 @@ Converte de linguagem fonte inventada para Java.
 Fernanda Sayuri <br>
 Lucas Prado <br>
 Leopoldo Kenji <br>
-João Melques <br>
+João Victor Melques <br>
 Victor Fachini
 
 
