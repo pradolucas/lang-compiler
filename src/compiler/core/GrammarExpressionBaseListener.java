@@ -5,6 +5,11 @@ package compiler.core;
 	import symbols.Identifier;
 	import symbols.SymbolTable;
 	import exceptions.SemanticException;
+	import abstract_syntax_tree.Program;
+	import abstract_syntax_tree.AbstractCommand;
+	import abstract_syntax_tree.CommandLeitura;
+	import abstract_syntax_tree.CommandEscrita;
+	import java.util.ArrayList;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;

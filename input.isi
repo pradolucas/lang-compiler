@@ -2,9 +2,13 @@ programa
 
 	declare NUMERO x, a, b, c, d.
 	declare STRING txt, l.
+
+	leia(x).
+	leia(b).
+	escreva(b).
+
 	x := 2.0.
 	b := 3.
-	
 	
 	se ( 2 >= 3) 
 	entao { leia(a)} 

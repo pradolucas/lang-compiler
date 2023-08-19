@@ -5,12 +5,22 @@ grammar GrammarExpression;
 	import symbols.Identifier;
 	import symbols.SymbolTable;
 	import exceptions.SemanticException;
+	import abstract_syntax_tree.Program;
+	import abstract_syntax_tree.AbstractCommand;
+	import abstract_syntax_tree.CommandLeitura;
+	import abstract_syntax_tree.CommandEscrita;
+	import java.util.ArrayList;
 }
 
 @members {
 	private SymbolTable symbolTable = new SymbolTable();
 	private DataType _currentType;
 	private String idAttr;
+	private Program program = new Program();
+	private ArrayList<AbstractCommand> curThread = new ArrayList<AbstractCommand>();
+
+	private String _readID;
+	private String _writeID;
 	
 	
 	public String lastToken(){
@@ -52,7 +62,23 @@ grammar GrammarExpression;
 		symbolTable.getValues().stream().forEach((id)->System.out.println(id));
 	}
 	
-	
+	public void leitura(){
+		_readID = lastToken();
+		CommandLeitura cmd = new CommandLeitura(_readID);
+		curThread.add(cmd);
+	}
+
+	public void escrita(){
+		_writeID = lastToken();
+		CommandEscrita cmd = new CommandEscrita(_writeID);
+		curThread.add(cmd);
+	}
+
+	public void exibeComandos(){
+		for (AbstractCommand c: program.getComandos()) {
+		System.out.println(c);
+	}
+	}
 	
 }
 
@@ -65,6 +91,7 @@ prog
 	{checkUnused();}
 
 	'fimprog.'
+	{program.setComandos(curThread);}
 ;
 
 declara
@@ -109,6 +136,7 @@ cmdleitura
 :
 	'leia' AP ID
 	{checkIdExists();}
+	{leitura();}
 
 	FP
 ;
@@ -120,6 +148,7 @@ cmdescrita
 		TEXTO
 		| ID
 		{checkIdExists();}
+		{escrita();}
 
 	) FP
 ;
