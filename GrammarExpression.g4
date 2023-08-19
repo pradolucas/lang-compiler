@@ -74,7 +74,12 @@ grammar GrammarExpression;
 	
 	public void leitura(){
 		_readID = lastToken();
-		CommandLeitura cmd = new CommandLeitura(_readID);
+		
+	}
+
+	public void commandLeitura(){
+		Identifier var = (Identifier)symbolTable.get(_readID);
+		CommandLeitura cmd = new CommandLeitura(_readID, var);
 		stack.peek().add(cmd);
 	}
 
@@ -86,7 +91,13 @@ grammar GrammarExpression;
 
 	public void exprAtribuicao(){
 		_exprID = lastToken();
+	}
+
+	public void contentAtribuicao(){
 		_exprContent = "";
+	}
+
+	public void commandAtribuicao(){
 		CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
 		stack.peek().add(cmd);
 	}
@@ -125,6 +136,11 @@ grammar GrammarExpression;
 		stack.push(curThread);
 	}
 	
+	public void generateCode(){
+		program.generateTarget();
+	}
+
+
 }
 
 prog
@@ -137,6 +153,7 @@ prog
 
 	'fimprog.'
 	{
+		program.setVarTable(symbolTable);
 		program.setComandos(stack.pop());	
 	}
 ;
@@ -186,7 +203,7 @@ cmdleitura
 	{checkIdExists();}
 	{leitura();}
 
-	FP
+	FP	{commandLeitura();}
 ;
 
 cmdescrita
@@ -205,11 +222,10 @@ cmdexpr
 :
 	ID
 	{checkIdExists();
-		idAttr = lastToken();
 		exprAtribuicao();
 	}
 
-	ATTR expr
+	ATTR {contentAtribuicao();} expr	{commandAtribuicao();}
 //	{attrExprToId(idAttr, );}
 
 ;
@@ -253,35 +269,35 @@ cmdwhile
 
 expr
 :
-	termo
+	termo	
 	(
 		(
-			OP_SUM
-			| OP_SUB
-			{inputTermo();}
-		) termo
-	)*
+			OP_SUM 
+			| OP_SUB {inputTermo();}
+			
+		) termo 
+	)*	
 ;
 
 termo
 :
-	fator
+	fator	
 	(
 		(
-			OP_MULT
-			| OP_DIV
-			{inputTermo();}
-		) fator
-	)*
+			OP_MULT 
+			| OP_DIV {inputTermo();}
+			
+		) fator 
+	)*	
 ;
 
 fator
 :
-	NUMBER
+	NUMBER {inputTermo();}
 	| ID
-	{checkIdExists(); checkInitialized(); inputTermo();}
+	{checkIdExists(); checkInitialized();}
 
-	| AP expr FC
+	| AP expr  FC
 ;
 
 //---------LEXICO---------

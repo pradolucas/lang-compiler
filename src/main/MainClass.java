@@ -25,6 +25,8 @@ public class MainClass {
 			System.out.println("Compilation Success!");
 			 parser.showTokens();
 			 parser.exibeComandos();
+			 parser.generateCode();
+
 //			System.out.println("------- TARGET --------------");
 //			parser.generateObjectCode();
 		} catch (SemanticException ex) {

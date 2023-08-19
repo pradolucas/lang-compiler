@@ -161,7 +161,12 @@ public class GrammarExpressionLexer extends Lexer {
 		
 		public void leitura(){
 			_readID = lastToken();
-			CommandLeitura cmd = new CommandLeitura(_readID);
+			
+		}
+
+		public void commandLeitura(){
+			Identifier var = (Identifier)symbolTable.get(_readID);
+			CommandLeitura cmd = new CommandLeitura(_readID, var);
 			stack.peek().add(cmd);
 		}
 
@@ -173,7 +178,13 @@ public class GrammarExpressionLexer extends Lexer {
 
 		public void exprAtribuicao(){
 			_exprID = lastToken();
+		}
+
+		public void contentAtribuicao(){
 			_exprContent = "";
+		}
+
+		public void commandAtribuicao(){
 			CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
 			stack.peek().add(cmd);
 		}
@@ -212,6 +223,11 @@ public class GrammarExpressionLexer extends Lexer {
 			stack.push(curThread);
 		}
 		
+		public void generateCode(){
+			program.generateTarget();
+		}
+
+
 
 
 	public GrammarExpressionLexer(CharStream input) {

@@ -1,7 +1,10 @@
 package abstract_syntax_tree;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.io.File;
 
+import symbols.Identifier;
 import symbols.SymbolTable;
 
 public class Program {
@@ -12,8 +15,35 @@ public class Program {
 
 
     public void generateTarget(){
+        StringBuilder str = new StringBuilder();
+        str.append("import java.util.Scanner;\n");
+        str.append("public class MainClass{\n");
+        str.append("public static void main(String args[]){\n");
+        str.append("    Scanner _key = new Scanner(System.in);\n");
+
+        for (Identifier symbol: varTable.getAll()){
+            str.append(symbol.generateJavaCode()+"\n");
+        }
+        for (AbstractCommand command : comandos){
+            str.append(command.generateJavaCode()+"\n");
+        }
+
+        str.append("}");
+        str.append("}");
+
+        try{
+            FileWriter fr = new FileWriter(new File("MainClass.java"));
+            fr.write(str.toString());
+            fr.close();
+        }
+        catch(Exception ex){
+        ex.printStackTrace();
+        }
+
+
 
     }
+
 
 
 

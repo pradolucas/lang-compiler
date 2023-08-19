@@ -2,6 +2,7 @@ package symbols;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class SymbolTable {
 	HashMap<String, Identifier> symbolTable;
@@ -20,6 +21,14 @@ public class SymbolTable {
 	
 	public Collection<Identifier> getValues() {
 		return symbolTable.values();
+	}
+
+	public ArrayList<Identifier> getAll(){
+		ArrayList<Identifier> lista = new ArrayList<Identifier>();
+		for (Identifier symbol : symbolTable.values()){
+			lista.add(symbol);
+		}
+		return lista;
 	}
 
 	public SymbolTable() {

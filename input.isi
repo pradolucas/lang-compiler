@@ -3,24 +3,16 @@ programa
 	declare NUMERO x, a, b, c, d.
 	declare STRING txt, l.
 
-	leia(x).
 	leia(b).
+	leia(x).
+	leia(l).
 	escreva(b).
 
-	x := 2.0.
-	b := 3+x*200/2.
+	x := 2.
+	b := 300.
 	
 	se ( 2 >= 3) 
 	entao { leia(a)} 
 	senao {escreva(x)}.
 	
-	while ( x > 3 ) {
-		a := 2
-	}.
-	
-	do
-	{
-		a := 2
-	}
-	while ( a > 3 ).
 fimprog.

@@ -1,6 +1,8 @@
 package symbols;
 
 public class Identifier {
+
+
 	private String name;
 	private DataType type;
 	private String value;
@@ -10,6 +12,7 @@ public class Identifier {
 		this.name = name;
 		this.type = type;
 	}
+
 
 	public String getName() {
 		return name;
@@ -38,6 +41,17 @@ public class Identifier {
 	@Override
 	public String toString() {
 		return "Identifier [name=" + name + ", type=" + type + ", value=" + value + "]";
+	}
+
+	public String generateJavaCode(){
+		String str;
+		if (type == DataType.NUM){
+			str = "double";
+		}
+		else{
+			str = "String";
+		}
+		return str + " "+name+";";
 	}
 
 }
