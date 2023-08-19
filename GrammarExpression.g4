@@ -10,7 +10,9 @@ grammar GrammarExpression;
 	import abstract_syntax_tree.CommandLeitura;
 	import abstract_syntax_tree.CommandEscrita;
 	import abstract_syntax_tree.CommandAtribuicao;
+	import abstract_syntax_tree.CommandDecisao;
 	import java.util.ArrayList;
+	import java.util.Stack;
 }
 
 @members {
@@ -18,12 +20,16 @@ grammar GrammarExpression;
 	private DataType _currentType;
 	private String idAttr;
 	private Program program = new Program();
-	private ArrayList<AbstractCommand> curThread = new ArrayList<AbstractCommand>();
+	private ArrayList<AbstractCommand> curThread;
 
+	private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 	private String _readID;
 	private String _writeID;
 	private String _exprID;
 	private String _exprContent;
+	private String _exprDecision;
+	private ArrayList<AbstractCommand> listaTrue;
+	private ArrayList<AbstractCommand> listaFalse;
 
 	
 	
@@ -69,20 +75,39 @@ grammar GrammarExpression;
 	public void leitura(){
 		_readID = lastToken();
 		CommandLeitura cmd = new CommandLeitura(_readID);
-		curThread.add(cmd);
+		stack.peek().add(cmd);
 	}
 
 	public void escrita(){
 		_writeID = lastToken();
 		CommandEscrita cmd = new CommandEscrita(_writeID);
-		curThread.add(cmd);
+		stack.peek().add(cmd);
 	}
 
 	public void exprAtribuicao(){
 		_exprID = lastToken();
 		_exprContent = "";
 		CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
-		curThread.add(cmd);
+		stack.peek().add(cmd);
+	}
+
+	public void listaTrueDecision(){
+		listaTrue = stack.pop();
+	}
+
+	public void listaFalseDecision(){
+		listaFalse = stack.pop();
+		CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
+		stack.peek().add(cmd);
+	}
+
+
+	public void exprDecision(){
+		_exprDecision = lastToken();
+	}
+
+	public void exprDecisionAcum(){
+		_exprDecision += lastToken();
 	}
 
 	public void inputTermo(){
@@ -93,6 +118,11 @@ grammar GrammarExpression;
 		for (AbstractCommand c: program.getComandos()) {
 		System.out.println(c);
 	}
+	}
+
+	public void commandStack(){
+		curThread = new ArrayList<AbstractCommand>();
+		stack.push(curThread);
 	}
 	
 }
@@ -106,7 +136,9 @@ prog
 	{checkUnused();}
 
 	'fimprog.'
-	{program.setComandos(curThread);}
+	{
+		program.setComandos(stack.pop());	
+	}
 ;
 
 declara
@@ -123,6 +155,7 @@ declara
 
 bloco
 :
+	{commandStack();}
 	(
 		cmd P
 	)+
@@ -183,15 +216,26 @@ cmdexpr
 
 cmdif
 :
-	'se' AP expr OP_REL expr FP 'entao' AC
+	'se' AP
+	expr {exprDecision();}
+	OP_REL {exprDecisionAcum();}
+	expr {exprDecisionAcum();}
+	FP 
+
+	
+	'entao' AC
+	{commandStack();}
 	(
 		cmd
 	)+ FC
+	{listaTrueDecision();}
 	(
 		'senao' AC
+		{commandStack();}
 		(
 			cmd
 		)+ FC
+		{listaFalseDecision();}
 	)?
 ;
 

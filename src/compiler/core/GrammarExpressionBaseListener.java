@@ -10,7 +10,9 @@ package compiler.core;
 	import abstract_syntax_tree.CommandLeitura;
 	import abstract_syntax_tree.CommandEscrita;
 	import abstract_syntax_tree.CommandAtribuicao;
+	import abstract_syntax_tree.CommandDecisao;
 	import java.util.ArrayList;
+	import java.util.Stack;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;

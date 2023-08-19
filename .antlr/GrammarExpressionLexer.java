@@ -9,7 +9,9 @@
 	import abstract_syntax_tree.CommandLeitura;
 	import abstract_syntax_tree.CommandEscrita;
 	import abstract_syntax_tree.CommandAtribuicao;
+	import abstract_syntax_tree.CommandDecisao;
 	import java.util.ArrayList;
+	import java.util.Stack;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -105,12 +107,16 @@ public class GrammarExpressionLexer extends Lexer {
 		private DataType _currentType;
 		private String idAttr;
 		private Program program = new Program();
-		private ArrayList<AbstractCommand> curThread = new ArrayList<AbstractCommand>();
+		private ArrayList<AbstractCommand> curThread;
 
+		private Stack<ArrayList<AbstractCommand>> stack = new Stack<ArrayList<AbstractCommand>>();
 		private String _readID;
 		private String _writeID;
 		private String _exprID;
 		private String _exprContent;
+		private String _exprDecision;
+		private ArrayList<AbstractCommand> listaTrue;
+		private ArrayList<AbstractCommand> listaFalse;
 
 		
 		
@@ -156,20 +162,39 @@ public class GrammarExpressionLexer extends Lexer {
 		public void leitura(){
 			_readID = lastToken();
 			CommandLeitura cmd = new CommandLeitura(_readID);
-			curThread.add(cmd);
+			stack.peek().add(cmd);
 		}
 
 		public void escrita(){
 			_writeID = lastToken();
 			CommandEscrita cmd = new CommandEscrita(_writeID);
-			curThread.add(cmd);
+			stack.peek().add(cmd);
 		}
 
 		public void exprAtribuicao(){
 			_exprID = lastToken();
 			_exprContent = "";
 			CommandAtribuicao cmd = new CommandAtribuicao(_exprID, _exprContent);
-			curThread.add(cmd);
+			stack.peek().add(cmd);
+		}
+
+		public void listaTrueDecision(){
+			listaTrue = stack.pop();
+		}
+
+		public void listaFalseDecision(){
+			listaFalse = stack.pop();
+			CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
+			stack.peek().add(cmd);
+		}
+
+
+		public void exprDecision(){
+			_exprDecision = lastToken();
+		}
+
+		public void exprDecisionAcum(){
+			_exprDecision += lastToken();
 		}
 
 		public void inputTermo(){
@@ -180,6 +205,11 @@ public class GrammarExpressionLexer extends Lexer {
 			for (AbstractCommand c: program.getComandos()) {
 			System.out.println(c);
 		}
+		}
+
+		public void commandStack(){
+			curThread = new ArrayList<AbstractCommand>();
+			stack.push(curThread);
 		}
 		
 
