@@ -185,7 +185,7 @@ public class GrammarExpressionLexer extends Lexer {
 			_exprID = lastToken();
 		}
 
-		public void contentAtribuicao(){
+		public void newExpr(){
 			_exprContent = "";
 		}
 
@@ -205,12 +205,12 @@ public class GrammarExpressionLexer extends Lexer {
 		}
 
 
-		public void exprDecision(){
-			_exprDecision = lastToken();
+		public void exprDecision(String _content){
+			_exprDecision = String.valueOf(_content);
 		}
 
-		public void exprDecisionAcum(){
-			_exprDecision += lastToken();
+		public void exprDecisionAcum(String _content){
+			_exprDecision += String.valueOf(_content);
 		}
 
 		public void inputTermo(){

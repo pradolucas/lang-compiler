@@ -12,7 +12,7 @@ public class MainClass {
 		try {
 
 			// lexer a partir da leitura do arquivo de entrada
-			GrammarExpressionLexer lexer = new GrammarExpressionLexer(CharStreams.fromFileName("input.isi"));
+			GrammarExpressionLexer lexer = new GrammarExpressionLexer(CharStreams.fromFileName("input.duroc"));
 
 			// TokenStream (o fluxo de tokens) a partir do lexer
 			CommonTokenStream tokenStream = new CommonTokenStream(lexer);
@@ -23,12 +23,12 @@ public class MainClass {
 			System.out.println("Starting file parsing...");
 			parser.prog();
 			System.out.println("Compilation Success!");
+			System.out.println("------- TOKENS --------------");
 			parser.showTokens();
+			System.out.println("------- COMMANDS --------------");
 			parser.exibeComandos();
+			System.out.println("------- TARGET --------------");
 			parser.generateCode();
-
-//			System.out.println("------- TARGET --------------");
-//			parser.generateObjectCode();
 		} catch (SemanticException ex) {
 			System.err.println("SEMANTIC ERROR - " + ex.getMessage());
 			ex.printStackTrace();

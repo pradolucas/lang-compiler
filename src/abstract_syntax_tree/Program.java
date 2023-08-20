@@ -16,7 +16,7 @@ public class Program {
 		StringBuilder str = new StringBuilder();
 		str.append("import java.util.Scanner;\n");
 		str.append("public class MainClass{\n");
-		str.append("public static void main(String args[]){\n");
+		str.append("public static void main(String[] args) {\n");
 		str.append("    Scanner _key = new Scanner(System.in);\n");
 
 		for (Identifier symbol : varTable.getAll()) {

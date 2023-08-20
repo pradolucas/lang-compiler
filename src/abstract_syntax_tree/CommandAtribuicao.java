@@ -17,7 +17,7 @@ public class CommandAtribuicao extends AbstractCommand {
 
 	@Override
 	public String toString() {
-		return "CommandAtribuicao [id=" + id + ", expr =" + expr + "]";
+		return "CommandAtribuicao [id=" + id + ", expr=" + expr + "]";
 	}
 
 }

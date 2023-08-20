@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class MainClass{
-public static void main(String args[]){
+public static void main(String[] args) {
     Scanner _key = new Scanner(System.in);
 double a;
 String txt;
@@ -16,12 +16,12 @@ System.out.println(b);
 txt = "abc";
 x = 2.0;
 b = 300+23;
-if (2>=3) {
+if ((2+4)>=(3+2)) {
 a= _key.nextDouble();}else {
 System.out.println(x);System.out.println(l);}
 System.out.println(txt);
 d = a+2;
-c = a+d+(8*2);
+c = a+d+(8+2);
 System.out.println(c);
 System.out.println(x);
 }}

@@ -97,7 +97,7 @@ grammar GrammarExpression;
 		_exprID = lastToken();
 	}
 
-	public void contentAtribuicao(){
+	public void newExpr(){
 		_exprContent = "";
 	}
 
@@ -117,12 +117,12 @@ grammar GrammarExpression;
 	}
 
 
-	public void exprDecision(){
-		_exprDecision = lastToken();
+	public void exprDecision(String _content){
+		_exprDecision = String.valueOf(_content);
 	}
 
-	public void exprDecisionAcum(){
-		_exprDecision += lastToken();
+	public void exprDecisionAcum(String _content){
+		_exprDecision += String.valueOf(_content);
 	}
 
 	public void inputTermo(){
@@ -202,7 +202,8 @@ cmd
 		| cmdexpr
 		| cmdif
 		| cmdwhile
-	) SC
+	) SC {newExpr();}	
+	
 ;
 
 cmdleitura
@@ -245,7 +246,7 @@ cmdexpr
 	}
 
 	ATTR
-	{contentAtribuicao();}
+	{newExpr();}	
 
 	expr
 	{	
@@ -258,13 +259,15 @@ cmdexpr
 cmdif
 :
 	'se' AP expr
-	{exprDecision();}
-
+	{exprDecision(_exprContent);} // N está avaliando caso expr maior que um termo
 	OP_REL
-	{exprDecisionAcum();}
+	{
+		exprDecisionAcum(lastToken());
+		newExpr();
+	}
 
 	expr
-	{exprDecisionAcum();}
+	{exprDecisionAcum(_exprContent);}
 
 	FP 'entao' AC
 	{commandStack();}
@@ -309,7 +312,7 @@ expr
 		{inputTermo();}
 
 		termo
-	)*
+	)*	
 ;
 
 termo
@@ -341,7 +344,6 @@ fator
 
 	| AP
 	{inputTermo();}
-
 	expr FP
 	{inputTermo();}
 

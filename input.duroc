@@ -12,7 +12,7 @@ programa
 	x := 2.0;
 	b := 300+23;
 	
-	se ( 2 >= 3) 
+	se ((2+4) >= (3+2)) 
 	entao { leia(a);} 
 	senao {
 		escreva(x);
@@ -24,7 +24,7 @@ programa
 	};
 	
 	d := a + 2;
-	c := a + d + (8*2);
+	c := a + d + (8+2);
 	escreva(c);
 	
 	do
