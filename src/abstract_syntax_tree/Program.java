@@ -1,8 +1,8 @@
 package abstract_syntax_tree;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.io.File;
 
 import symbols.Identifier;
 import symbols.SymbolTable;
@@ -17,8 +17,15 @@ public class Program {
 		str.append("import java.util.Scanner;\n");
 		str.append("public class MainClass{\n");
 		str.append("public static void main(String[] args) {\n");
-		str.append("    Scanner _key = new Scanner(System.in);\n");
 
+		for (AbstractCommand command : comandos) {
+			if(CommandEscrita.class.isInstance(command) || CommandLeitura.class.isInstance(command)) {
+				str.append("    Scanner _key = new Scanner(System.in);\n");
+				break;
+			}
+		}
+
+		
 		for (Identifier symbol : varTable.getAll()) {
 			str.append(symbol.generateJavaCode() + "\n");
 		}
