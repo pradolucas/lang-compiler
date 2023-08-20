@@ -1,5 +1,4 @@
-// Generated from GrammarExpression.g4 by ANTLR 4.13.0
-package compiler.core;
+// Generated from GrammarExpression.g4 by ANTLR 4.4
 
 	import symbols.DataType;
 	import symbols.Identifier;
@@ -14,6 +13,7 @@ package compiler.core;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
+import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -22,133 +22,133 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface GrammarExpressionListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#prog}.
-	 * @param ctx the parse tree
-	 */
-	void enterProg(GrammarExpressionParser.ProgContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#prog}.
-	 * @param ctx the parse tree
-	 */
-	void exitProg(GrammarExpressionParser.ProgContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#declara}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclara(GrammarExpressionParser.DeclaraContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#declara}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclara(GrammarExpressionParser.DeclaraContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#bloco}.
-	 * @param ctx the parse tree
-	 */
-	void enterBloco(GrammarExpressionParser.BlocoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#bloco}.
-	 * @param ctx the parse tree
-	 */
-	void exitBloco(GrammarExpressionParser.BlocoContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#tipo}.
 	 * @param ctx the parse tree
 	 */
-	void enterTipo(GrammarExpressionParser.TipoContext ctx);
+	void enterTipo(@NotNull GrammarExpressionParser.TipoContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link GrammarExpressionParser#tipo}.
 	 * @param ctx the parse tree
 	 */
-	void exitTipo(GrammarExpressionParser.TipoContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmd}.
-	 * @param ctx the parse tree
-	 */
-	void enterCmd(GrammarExpressionParser.CmdContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmd}.
-	 * @param ctx the parse tree
-	 */
-	void exitCmd(GrammarExpressionParser.CmdContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdleitura}.
-	 * @param ctx the parse tree
-	 */
-	void enterCmdleitura(GrammarExpressionParser.CmdleituraContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdleitura}.
-	 * @param ctx the parse tree
-	 */
-	void exitCmdleitura(GrammarExpressionParser.CmdleituraContext ctx);
+	void exitTipo(@NotNull GrammarExpressionParser.TipoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdescrita}.
 	 * @param ctx the parse tree
 	 */
-	void enterCmdescrita(GrammarExpressionParser.CmdescritaContext ctx);
+	void enterCmdescrita(@NotNull GrammarExpressionParser.CmdescritaContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdescrita}.
 	 * @param ctx the parse tree
 	 */
-	void exitCmdescrita(GrammarExpressionParser.CmdescritaContext ctx);
+	void exitCmdescrita(@NotNull GrammarExpressionParser.CmdescritaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdexpr}.
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#bloco}.
 	 * @param ctx the parse tree
 	 */
-	void enterCmdexpr(GrammarExpressionParser.CmdexprContext ctx);
+	void enterBloco(@NotNull GrammarExpressionParser.BlocoContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdexpr}.
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#bloco}.
 	 * @param ctx the parse tree
 	 */
-	void exitCmdexpr(GrammarExpressionParser.CmdexprContext ctx);
+	void exitBloco(@NotNull GrammarExpressionParser.BlocoContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdif}.
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#declara}.
 	 * @param ctx the parse tree
 	 */
-	void enterCmdif(GrammarExpressionParser.CmdifContext ctx);
+	void enterDeclara(@NotNull GrammarExpressionParser.DeclaraContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdif}.
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#declara}.
 	 * @param ctx the parse tree
 	 */
-	void exitCmdif(GrammarExpressionParser.CmdifContext ctx);
+	void exitDeclara(@NotNull GrammarExpressionParser.DeclaraContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdwhile}.
 	 * @param ctx the parse tree
 	 */
-	void enterCmdwhile(GrammarExpressionParser.CmdwhileContext ctx);
+	void enterCmdwhile(@NotNull GrammarExpressionParser.CmdwhileContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdwhile}.
 	 * @param ctx the parse tree
 	 */
-	void exitCmdwhile(GrammarExpressionParser.CmdwhileContext ctx);
+	void exitCmdwhile(@NotNull GrammarExpressionParser.CmdwhileContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GrammarExpressionParser#expr}.
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#prog}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(GrammarExpressionParser.ExprContext ctx);
+	void enterProg(@NotNull GrammarExpressionParser.ProgContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GrammarExpressionParser#expr}.
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#prog}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(GrammarExpressionParser.ExprContext ctx);
+	void exitProg(@NotNull GrammarExpressionParser.ProgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdif}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdif(@NotNull GrammarExpressionParser.CmdifContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdif}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdif(@NotNull GrammarExpressionParser.CmdifContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#termo}.
 	 * @param ctx the parse tree
 	 */
-	void enterTermo(GrammarExpressionParser.TermoContext ctx);
+	void enterTermo(@NotNull GrammarExpressionParser.TermoContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link GrammarExpressionParser#termo}.
 	 * @param ctx the parse tree
 	 */
-	void exitTermo(GrammarExpressionParser.TermoContext ctx);
+	void exitTermo(@NotNull GrammarExpressionParser.TermoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdexpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdexpr(@NotNull GrammarExpressionParser.CmdexprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdexpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdexpr(@NotNull GrammarExpressionParser.CmdexprContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GrammarExpressionParser#fator}.
 	 * @param ctx the parse tree
 	 */
-	void enterFator(GrammarExpressionParser.FatorContext ctx);
+	void enterFator(@NotNull GrammarExpressionParser.FatorContext ctx);
 	/**
 	 * Exit a parse tree produced by {@link GrammarExpressionParser#fator}.
 	 * @param ctx the parse tree
 	 */
-	void exitFator(GrammarExpressionParser.FatorContext ctx);
+	void exitFator(@NotNull GrammarExpressionParser.FatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpr(@NotNull GrammarExpressionParser.ExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpr(@NotNull GrammarExpressionParser.ExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmd}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmd(@NotNull GrammarExpressionParser.CmdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmd}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmd(@NotNull GrammarExpressionParser.CmdContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GrammarExpressionParser#cmdleitura}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdleitura(@NotNull GrammarExpressionParser.CmdleituraContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GrammarExpressionParser#cmdleitura}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdleitura(@NotNull GrammarExpressionParser.CmdleituraContext ctx);
 }

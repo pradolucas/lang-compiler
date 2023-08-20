@@ -48,19 +48,16 @@ grammar GrammarExpression;
 	}
 
 	public void attrExprToId(String Tid, String value){
-//		TODO Assegurar o token id, não é last value, pois será o lado direito da expressao. 
 		symbolTable.get(Tid).setValue(value);
 	}
 
 	public void checkInitialized(){
-//		//			TIP para testes comente essa funcao, a atribuicao de valor (funcao a attrExprToId) n foi implementada
-//					if(symbolTable.get(lastToken()).getValue() == null){
-//						throw new SemanticException("Variável " + lastToken() + " não incializada."); 
-//					}
+		if(symbolTable.get(lastToken()).getValue() == null){
+			throw new SemanticException("Variável " + lastToken() + " não incializada."); 
+		}
 		assert true;
 	}
-
-
+	
 	public void checkUnused(){
 		//			ERRADO
 		//			symbolTable.getValues().stream().forEach((id)->if(id.getValue() == NULL) throw new SemanticException("Variável " + id.getName() + " não incializada."));
@@ -218,7 +215,10 @@ cmdescrita
 	(
 		TEXTO
 		| ID
-		{checkIdExists();}
+		{
+			checkIdExists();
+//		 	markVarUsed();
+		}
 
 		{escrita();}
 
@@ -228,7 +228,8 @@ cmdescrita
 cmdexpr
 :
 	ID
-	{checkIdExists();
+	{
+		checkIdExists();
 		exprAtribuicao();
 	}
 
@@ -236,8 +237,10 @@ cmdexpr
 	{contentAtribuicao();}
 
 	expr
-	{commandAtribuicao();}
-//		{attrExprToId(_exprID, );}
+	{	
+		commandAtribuicao();
+		attrExprToId(_exprID,_exprContent );
+	}
 
 ;
 
