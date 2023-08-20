@@ -11,6 +11,7 @@ grammar GrammarExpression;
 	import abstract_syntax_tree.CommandEscrita;
 	import abstract_syntax_tree.CommandAtribuicao;
 	import abstract_syntax_tree.CommandDecisao;
+	import abstract_syntax_tree.CommandRepeticao;
 	import java.util.ArrayList;
 	import java.util.Stack;
 }
@@ -30,6 +31,9 @@ grammar GrammarExpression;
 	private String _exprDecision;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
+
+	private String _exprRepeticao;
+    private ArrayList<AbstractCommand> listaCmd;
 
 
 
@@ -116,6 +120,13 @@ grammar GrammarExpression;
 		stack.peek().add(cmd);
 	}
 
+	public void listaRepeticao(){
+        listaCmd = stack.pop();
+		CommandRepeticao cmd = new CommandRepeticao(_exprRepeticao, listaCmd);
+        stack.peek().add(cmd);
+    }
+
+
 
 	public void exprDecision(String _content){
 		_exprDecision = String.valueOf(_content);
@@ -124,6 +135,14 @@ grammar GrammarExpression;
 	public void exprDecisionAcum(String _content){
 		_exprDecision += String.valueOf(_content);
 	}
+
+	public void exprRepeticao(String _content){
+        _exprRepeticao = String.valueOf(_content);
+    }
+    public void exprRepeticaoAcum(String _content){
+        _exprRepeticao += String.valueOf(_content);
+    }
+
 
 	public void inputTermo(){
 		_exprContent += lastToken();
@@ -291,15 +310,35 @@ cmdif
 
 cmdwhile
 :
-	'do' AC
-	(
-		cmd
-	)+ FC 'while' AP expr OP_REL expr FP
-	| 'while' AP expr OP_REL expr FP AC
-	(
-		cmd
-	)+ FC
+    'do' AC		{commandStack();}
+    (
+        cmd
+    )+ FC   //{listaRepeticao();}
+
+	//{commandStack();}
+	
+
+    'while' 
+    AP 
+    expr {exprRepeticao(_exprContent);}
+    OP_REL {exprRepeticaoAcum(lastToken()); newExpr();}
+    expr {exprRepeticaoAcum(_exprContent);}
+	//{commandStack();}
+	{listaRepeticao();}
+	
+    FP	
+
+    |'while' 
+    AP expr {exprRepeticao(_exprContent);}
+    OP_REL {exprRepeticaoAcum(lastToken()); newExpr();}
+    expr {exprRepeticaoAcum(_exprContent);}
+    FP 
+    AC  {commandStack();}
+    (
+        cmd
+    )+ FC   {listaRepeticao();}
 ;
+
 
 expr
 :

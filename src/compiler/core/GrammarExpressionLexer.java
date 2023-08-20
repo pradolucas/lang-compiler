@@ -11,6 +11,7 @@ package compiler.core;
 	import abstract_syntax_tree.CommandEscrita;
 	import abstract_syntax_tree.CommandAtribuicao;
 	import abstract_syntax_tree.CommandDecisao;
+	import abstract_syntax_tree.CommandRepeticao;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -119,6 +120,9 @@ public class GrammarExpressionLexer extends Lexer {
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
 
+		private String _exprRepeticao;
+	    private ArrayList<AbstractCommand> listaCmd;
+
 
 
 		public String lastToken(){
@@ -204,6 +208,13 @@ public class GrammarExpressionLexer extends Lexer {
 			stack.peek().add(cmd);
 		}
 
+		public void listaRepeticao(){
+	        listaCmd = stack.pop();
+			CommandRepeticao cmd = new CommandRepeticao(_exprRepeticao, listaCmd);
+	        stack.peek().add(cmd);
+	    }
+
+
 
 		public void exprDecision(String _content){
 			_exprDecision = String.valueOf(_content);
@@ -212,6 +223,14 @@ public class GrammarExpressionLexer extends Lexer {
 		public void exprDecisionAcum(String _content){
 			_exprDecision += String.valueOf(_content);
 		}
+
+		public void exprRepeticao(String _content){
+	        _exprRepeticao = String.valueOf(_content);
+	    }
+	    public void exprRepeticaoAcum(String _content){
+	        _exprRepeticao += String.valueOf(_content);
+	    }
+
 
 		public void inputTermo(){
 			_exprContent += lastToken();

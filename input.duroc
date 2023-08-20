@@ -23,14 +23,35 @@ programa
 		escreva(txt);
 	};
 	
-	d := a + 2;
+	d = 4+2;
 	c := a + d + (8+2);
 	escreva(c);
 	
+
+
 	do
 	{
 	escreva(x);
-	}
-	while( 1>=2);
+	}while( 1>=2);
+
+	while(3>=2) {
+		escreva(txt);
+	};
+
+
+	while(3>=2+1) {
+		escreva(txt);
+		escreva(c);
+	};
+
+	do
+	{
+	escreva(x);
+	while(3>=2+1) {
+		escreva(txt);
+		escreva(c);
+	};
+	}while( 13>=23);
+	
 	
 fimprog.

@@ -10,6 +10,7 @@
 	import abstract_syntax_tree.CommandEscrita;
 	import abstract_syntax_tree.CommandAtribuicao;
 	import abstract_syntax_tree.CommandDecisao;
+	import abstract_syntax_tree.CommandRepeticao;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
@@ -118,50 +119,57 @@ public class GrammarExpressionLexer extends Lexer {
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
 
-		
-		
+		private String _exprRepeticao;
+	    private ArrayList<AbstractCommand> listaCmd;
+
+
+
 		public String lastToken(){
 			return ((TokenStream) _input).LT(-1).getText();
 		}
 		public void addId(){
-	//		System.out.println("[TOKEN] "+ lastToken());
-
 			symbolTable.add(lastToken(), new Identifier(lastToken(), _currentType));
 		}
 		
-		public void checkIdExists(){
+		public void	markVarUsed(){
+			symbolTable.get(lastToken()).setUsed();
+		}
+		
+		public void	markVarInitialized(){
+			symbolTable.get(lastToken()).setInitialized();
+		}
+		
+		public void attrExprToId(String Tid, String value){
+			symbolTable.get(Tid).setValue(value);
+		}
+
+		public void checkDeclared(){
 			if(!symbolTable.containsKey(lastToken())){
 				throw new SemanticException("Variável não declarada " + lastToken() + "."); 
 			}
 		}
-		
-		public void attrExprToId(String Tid, String value){
-	//		TODO Assegurar o token id, não é last value, pois será o lado direito da expressao. 
-			symbolTable.get(Tid).setValue(value);
-		}
-		
-		public void checkInitialized(){
-	////		TIP para testes comente essa funcao, a atribuicao de valor (funcao a attrExprToId) n foi implementada
-	//		if(symbolTable.get(lastToken()).getValue() == null){
-	//			throw new SemanticException("Variável " + lastToken() + " não incializada."); 
-	//		}
-			assert true;
-		}
-		
 
-		public void checkUnused(){
-	//		ERRADO
-	//		symbolTable.getValues().stream().forEach((id)->if(id.getValue() == NULL) throw new SemanticException("Variável " + id.getName() + " não incializada."));
-			assert true;
+		public void checkInitialized(){
+			if(!symbolTable.get(lastToken()).getInitialized()){
+				throw new SemanticException("Variável " + lastToken() + " não inicializada."); 
+			}
 		}
 		
+		public void checkUnused(){
+			symbolTable.getValues().stream().forEach((id) -> {
+			    if (!id.getUsed()) {
+			        throw new SemanticException("Variável " + id.getName() + " não utilizada.");
+			    }
+			});
+		}
+
 		public void showTokens(){
 			symbolTable.getValues().stream().forEach((id)->System.out.println(id));
 		}
-		
+
 		public void leitura(){
 			_readID = lastToken();
-			
+
 		}
 
 		public void commandLeitura(){
@@ -180,7 +188,7 @@ public class GrammarExpressionLexer extends Lexer {
 			_exprID = lastToken();
 		}
 
-		public void contentAtribuicao(){
+		public void newExpr(){
 			_exprContent = "";
 		}
 
@@ -199,34 +207,49 @@ public class GrammarExpressionLexer extends Lexer {
 			stack.peek().add(cmd);
 		}
 
+		public void listaRepeticao(){
+	        listaCmd = stack.pop();
+			CommandRepeticao cmd = new CommandRepeticao(_exprRepeticao, listaCmd);
+	        stack.peek().add(cmd);
+	    }
 
-		public void exprDecision(){
-			_exprDecision = lastToken();
+
+
+		public void exprDecision(String _content){
+			_exprDecision = String.valueOf(_content);
 		}
 
-		public void exprDecisionAcum(){
-			_exprDecision += lastToken();
+		public void exprDecisionAcum(String _content){
+			_exprDecision += String.valueOf(_content);
 		}
+
+		public void exprRepeticao(String _content){
+	        _exprRepeticao = String.valueOf(_content);
+	    }
+	    public void exprRepeticaoAcum(String _content){
+	        _exprRepeticao += String.valueOf(_content);
+	    }
+
 
 		public void inputTermo(){
 			_exprContent += lastToken();
 		}
 
+
 		public void exibeComandos(){
 			for (AbstractCommand c: program.getComandos()) {
-			System.out.println(c);
-		}
+				System.out.println(c);
+			}
 		}
 
 		public void commandStack(){
 			curThread = new ArrayList<AbstractCommand>();
 			stack.push(curThread);
 		}
-		
+
 		public void generateCode(){
 			program.generateTarget();
 		}
-
 
 
 
@@ -272,29 +295,29 @@ public class GrammarExpressionLexer extends Lexer {
 		"\n\36\r\36\16\36\u00ce\3\36\3\36\3\37\3\37\3\37\3\37\2\2 \3\3\5\4\7\5"+
 		"\t\6\13\7\r\b\17\t\21\n\23\13\25\f\27\r\31\16\33\17\35\20\37\21!\22#\23"+
 		"%\24\'\25)\26+\27-\30/\31\61\32\63\33\65\34\67\359\36;\37= \3\2\b\4\2"+
-		">>@@\3\2c|\5\2\62;C\\c|\3\2\62;\6\2\"\"\62;C\\c|\5\2\13\f\17\17\"\"\2"+
-		"\u00df\2\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2"+
-		"\r\3\2\2\2\2\17\3\2\2\2\2\21\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3"+
-		"\2\2\2\2\31\3\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2"+
-		"\2#\3\2\2\2\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2\2\2"+
-		"/\3\2\2\2\2\61\3\2\2\2\2\63\3\2\2\2\2\65\3\2\2\2\2\67\3\2\2\2\29\3\2\2"+
-		"\2\2;\3\2\2\2\2=\3\2\2\2\3?\3\2\2\2\5H\3\2\2\2\7Q\3\2\2\2\tY\3\2\2\2\13"+
-		"`\3\2\2\2\rg\3\2\2\2\17l\3\2\2\2\21t\3\2\2\2\23w\3\2\2\2\25}\3\2\2\2\27"+
-		"\u0083\3\2\2\2\31\u0086\3\2\2\2\33\u008c\3\2\2\2\35\u008e\3\2\2\2\37\u0090"+
-		"\3\2\2\2!\u0092\3\2\2\2#\u0094\3\2\2\2%\u0096\3\2\2\2\'\u0098\3\2\2\2"+
-		")\u009a\3\2\2\2+\u009c\3\2\2\2-\u009e\3\2\2\2/\u00a0\3\2\2\2\61\u00a2"+
-		"\3\2\2\2\63\u00ad\3\2\2\2\65\u00af\3\2\2\2\67\u00b3\3\2\2\29\u00be\3\2"+
-		"\2\2;\u00ca\3\2\2\2=\u00d2\3\2\2\2?@\7r\2\2@A\7t\2\2AB\7q\2\2BC\7i\2\2"+
-		"CD\7t\2\2DE\7c\2\2EF\7o\2\2FG\7c\2\2G\4\3\2\2\2HI\7h\2\2IJ\7k\2\2JK\7"+
-		"o\2\2KL\7r\2\2LM\7t\2\2MN\7q\2\2NO\7i\2\2OP\7\60\2\2P\6\3\2\2\2QR\7f\2"+
-		"\2RS\7g\2\2ST\7e\2\2TU\7n\2\2UV\7c\2\2VW\7t\2\2WX\7g\2\2X\b\3\2\2\2YZ"+
-		"\7P\2\2Z[\7W\2\2[\\\7O\2\2\\]\7G\2\2]^\7T\2\2^_\7Q\2\2_\n\3\2\2\2`a\7"+
-		"U\2\2ab\7V\2\2bc\7T\2\2cd\7K\2\2de\7P\2\2ef\7I\2\2f\f\3\2\2\2gh\7n\2\2"+
-		"hi\7g\2\2ij\7k\2\2jk\7c\2\2k\16\3\2\2\2lm\7g\2\2mn\7u\2\2no\7e\2\2op\7"+
-		"t\2\2pq\7g\2\2qr\7x\2\2rs\7c\2\2s\20\3\2\2\2tu\7u\2\2uv\7g\2\2v\22\3\2"+
-		"\2\2wx\7g\2\2xy\7p\2\2yz\7v\2\2z{\7c\2\2{|\7q\2\2|\24\3\2\2\2}~\7u\2\2"+
-		"~\177\7g\2\2\177\u0080\7p\2\2\u0080\u0081\7c\2\2\u0081\u0082\7q\2\2\u0082"+
-		"\26\3\2\2\2\u0083\u0084\7f\2\2\u0084\u0085\7q\2\2\u0085\30\3\2\2\2\u0086"+
+		">>@@\3\2c|\5\2\62;C\\c|\3\2\62;\5\2DDFFSS\5\2\13\f\17\17\"\"\2\u00df\2"+
+		"\3\3\2\2\2\2\5\3\2\2\2\2\7\3\2\2\2\2\t\3\2\2\2\2\13\3\2\2\2\2\r\3\2\2"+
+		"\2\2\17\3\2\2\2\2\21\3\2\2\2\2\23\3\2\2\2\2\25\3\2\2\2\2\27\3\2\2\2\2"+
+		"\31\3\2\2\2\2\33\3\2\2\2\2\35\3\2\2\2\2\37\3\2\2\2\2!\3\2\2\2\2#\3\2\2"+
+		"\2\2%\3\2\2\2\2\'\3\2\2\2\2)\3\2\2\2\2+\3\2\2\2\2-\3\2\2\2\2/\3\2\2\2"+
+		"\2\61\3\2\2\2\2\63\3\2\2\2\2\65\3\2\2\2\2\67\3\2\2\2\29\3\2\2\2\2;\3\2"+
+		"\2\2\2=\3\2\2\2\3?\3\2\2\2\5H\3\2\2\2\7Q\3\2\2\2\tY\3\2\2\2\13`\3\2\2"+
+		"\2\rg\3\2\2\2\17l\3\2\2\2\21t\3\2\2\2\23w\3\2\2\2\25}\3\2\2\2\27\u0083"+
+		"\3\2\2\2\31\u0086\3\2\2\2\33\u008c\3\2\2\2\35\u008e\3\2\2\2\37\u0090\3"+
+		"\2\2\2!\u0092\3\2\2\2#\u0094\3\2\2\2%\u0096\3\2\2\2\'\u0098\3\2\2\2)\u009a"+
+		"\3\2\2\2+\u009c\3\2\2\2-\u009e\3\2\2\2/\u00a0\3\2\2\2\61\u00a2\3\2\2\2"+
+		"\63\u00ad\3\2\2\2\65\u00af\3\2\2\2\67\u00b3\3\2\2\29\u00be\3\2\2\2;\u00ca"+
+		"\3\2\2\2=\u00d2\3\2\2\2?@\7r\2\2@A\7t\2\2AB\7q\2\2BC\7i\2\2CD\7t\2\2D"+
+		"E\7c\2\2EF\7o\2\2FG\7c\2\2G\4\3\2\2\2HI\7h\2\2IJ\7k\2\2JK\7o\2\2KL\7r"+
+		"\2\2LM\7t\2\2MN\7q\2\2NO\7i\2\2OP\7\60\2\2P\6\3\2\2\2QR\7f\2\2RS\7g\2"+
+		"\2ST\7e\2\2TU\7n\2\2UV\7c\2\2VW\7t\2\2WX\7g\2\2X\b\3\2\2\2YZ\7P\2\2Z["+
+		"\7W\2\2[\\\7O\2\2\\]\7G\2\2]^\7T\2\2^_\7Q\2\2_\n\3\2\2\2`a\7U\2\2ab\7"+
+		"V\2\2bc\7T\2\2cd\7K\2\2de\7P\2\2ef\7I\2\2f\f\3\2\2\2gh\7n\2\2hi\7g\2\2"+
+		"ij\7k\2\2jk\7c\2\2k\16\3\2\2\2lm\7g\2\2mn\7u\2\2no\7e\2\2op\7t\2\2pq\7"+
+		"g\2\2qr\7x\2\2rs\7c\2\2s\20\3\2\2\2tu\7u\2\2uv\7g\2\2v\22\3\2\2\2wx\7"+
+		"g\2\2xy\7p\2\2yz\7v\2\2z{\7c\2\2{|\7q\2\2|\24\3\2\2\2}~\7u\2\2~\177\7"+
+		"g\2\2\177\u0080\7p\2\2\u0080\u0081\7c\2\2\u0081\u0082\7q\2\2\u0082\26"+
+		"\3\2\2\2\u0083\u0084\7f\2\2\u0084\u0085\7q\2\2\u0085\30\3\2\2\2\u0086"+
 		"\u0087\7y\2\2\u0087\u0088\7j\2\2\u0088\u0089\7k\2\2\u0089\u008a\7n\2\2"+
 		"\u008a\u008b\7g\2\2\u008b\32\3\2\2\2\u008c\u008d\7*\2\2\u008d\34\3\2\2"+
 		"\2\u008e\u008f\7+\2\2\u008f\36\3\2\2\2\u0090\u0091\7}\2\2\u0091 \3\2\2"+
@@ -315,11 +338,11 @@ public class GrammarExpressionLexer extends Lexer {
 		"\3\2\2\2\u00c0\u00c1\3\2\2\2\u00c1\u00c8\3\2\2\2\u00c2\u00c4\7\60\2\2"+
 		"\u00c3\u00c5\t\5\2\2\u00c4\u00c3\3\2\2\2\u00c5\u00c6\3\2\2\2\u00c6\u00c4"+
 		"\3\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\u00c9\3\2\2\2\u00c8\u00c2\3\2\2\2\u00c8"+
-		"\u00c9\3\2\2\2\u00c9:\3\2\2\2\u00ca\u00cc\5)\25\2\u00cb\u00cd\t\6\2\2"+
+		"\u00c9\3\2\2\2\u00c9:\3\2\2\2\u00ca\u00cc\5)\25\2\u00cb\u00cd\n\6\2\2"+
 		"\u00cc\u00cb\3\2\2\2\u00cd\u00ce\3\2\2\2\u00ce\u00cc\3\2\2\2\u00ce\u00cf"+
 		"\3\2\2\2\u00cf\u00d0\3\2\2\2\u00d0\u00d1\5)\25\2\u00d1<\3\2\2\2\u00d2"+
 		"\u00d3\t\7\2\2\u00d3\u00d4\3\2\2\2\u00d4\u00d5\b\37\2\2\u00d5>\3\2\2\2"+
-		"\f\2\u00ad\u00b5\u00b8\u00ba\u00c0\u00c6\u00c8\u00cc\u00ce\3\b\2\2";
+		"\13\2\u00ad\u00b5\u00b8\u00ba\u00c0\u00c6\u00c8\u00ce\3\b\2\2";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

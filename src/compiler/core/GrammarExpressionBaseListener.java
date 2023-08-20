@@ -11,6 +11,7 @@ package compiler.core;
 	import abstract_syntax_tree.CommandEscrita;
 	import abstract_syntax_tree.CommandAtribuicao;
 	import abstract_syntax_tree.CommandDecisao;
+	import abstract_syntax_tree.CommandRepeticao;
 	import java.util.ArrayList;
 	import java.util.Stack;
 
