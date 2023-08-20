@@ -171,7 +171,7 @@ prog
 	'programa'
 	(
 		declara
-	)+ bloco
+	)* bloco
 	{checkUnused();}
 
 	'fimprog.'
@@ -249,10 +249,8 @@ cmdescrita
 			checkDeclared();
 		 	markVarUsed();
 		}
-
-		{escrita();}
-
-	) FP
+	) {escrita();} 
+	FP
 ;
 
 cmdexpr
