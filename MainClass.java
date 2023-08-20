@@ -25,11 +25,10 @@ a= _key.nextDouble();}else {
 System.out.println(x);
 System.out.println(l);
 }
-do{
+while (3>=2){
 System.out.println(txt);
 
-} while (3>=2);
-
+}
 d = 4+2;
 
 c = a+d+(8+2);
@@ -41,25 +40,22 @@ System.out.println(x);
 
 } while (1>=2);
 
-do{
+while (3>=2){
 System.out.println(txt);
 
-} while (3>=2);
-
-do{
+}
+while (3>=2+1){
 System.out.println(txt);
 System.out.println(c);
 
-} while (3>=2+1);
-
+}
 do{
 System.out.println(x);
-do{
+while ((2+1)>=(3*3)){
 System.out.println(txt);
 System.out.println(c);
 
-} while (3>=2+1);
-
+}
 } while (13>=23);
 
 }}

@@ -26,8 +26,6 @@ programa
 	d = 4+2;
 	c := a + d + (8+2);
 	escreva(c);
-	
-
 
 	do
 	{
@@ -47,7 +45,7 @@ programa
 	do
 	{
 	escreva(x);
-	while(3>=2+1) {
+	while((2+1) >= (3*3)) {
 		escreva(txt);
 		escreva(c);
 	};

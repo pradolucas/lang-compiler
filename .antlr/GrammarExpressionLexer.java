@@ -121,6 +121,7 @@ public class GrammarExpressionLexer extends Lexer {
 
 		private String _exprRepeticao;
 	    private ArrayList<AbstractCommand> listaCmd;
+		private String tipoWhile;
 
 
 
@@ -207,9 +208,9 @@ public class GrammarExpressionLexer extends Lexer {
 			stack.peek().add(cmd);
 		}
 
-		public void listaRepeticao(){
+		public void listaRepeticao(String _tipoWhile){
 	        listaCmd = stack.pop();
-			CommandRepeticao cmd = new CommandRepeticao(_exprRepeticao, listaCmd);
+			CommandRepeticao cmd = new CommandRepeticao(_exprRepeticao, listaCmd,_tipoWhile);
 	        stack.peek().add(cmd);
 	    }
 

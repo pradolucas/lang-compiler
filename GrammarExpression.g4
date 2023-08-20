@@ -34,6 +34,7 @@ grammar GrammarExpression;
 
 	private String _exprRepeticao;
     private ArrayList<AbstractCommand> listaCmd;
+	private String tipoWhile;
 
 
 
@@ -120,9 +121,9 @@ grammar GrammarExpression;
 		stack.peek().add(cmd);
 	}
 
-	public void listaRepeticao(){
+	public void listaRepeticao(String _tipoWhile){
         listaCmd = stack.pop();
-		CommandRepeticao cmd = new CommandRepeticao(_exprRepeticao, listaCmd);
+		CommandRepeticao cmd = new CommandRepeticao(_exprRepeticao, listaCmd,_tipoWhile);
         stack.peek().add(cmd);
     }
 
@@ -322,7 +323,7 @@ cmdwhile
     OP_REL {exprRepeticaoAcum(lastToken()); newExpr();}
     expr {exprRepeticaoAcum(_exprContent);}
 	//{commandStack();}
-	{listaRepeticao();}
+	{listaRepeticao("DoWhile");}
 	
     FP	
 
@@ -334,7 +335,7 @@ cmdwhile
     AC  {commandStack();}
     (
         cmd
-    )+ FC   {listaRepeticao();}
+    )+ FC   {listaRepeticao("While");}
 ;
 
 
