@@ -3,25 +3,21 @@ public class MainClass{
 public static void main(String[] args) {
     Scanner _key = new Scanner(System.in);
 double a;
-String txt;
 double b;
 double c;
-double d;
-double x;
-String l;
+String e;
+String f;
+String g;
+a= _key.nextDouble();
 b= _key.nextDouble();
-x= _key.nextDouble();
-l= _key.nextLine();
-System.out.println(b);
-txt = "abc";
-x = 2.0;
-b = 300+23;
-if ((2+4)>=(3+2)) {
-a= _key.nextDouble();}else {
-System.out.println(x);System.out.println(l);}
-System.out.println(txt);
-d = a+2;
-c = a+d+(8+2);
+e= _key.nextLine();
 System.out.println(c);
-System.out.println(x);
+a = 2.0;
+b = 300+23;
+e = "abc";
+if (3<=(3+2)) {
+System.out.println(f);}else {
+c = a+b;f = e;}
+if ((10*a)!=(45+1)) {
+System.out.println(g);}
 }}
