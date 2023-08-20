@@ -14,16 +14,23 @@ programa
 	
 	se ( 2 >= 3) 
 	entao { leia(a);} 
-	senao {escreva(x);};
+	senao {
+		escreva(x);
+		escreva(l);
+	};
 	
-	while( 3>=2) {
+	while(3>=2) {
 		escreva(txt);
 	};
+	
+	d := a + 2;
+	c := a + d;
+	escreva(c);
 	
 	do
 	{
 	escreva(x);
 	}
-	while( 3>=2);
+	while( 1>=2);
 	
 fimprog.

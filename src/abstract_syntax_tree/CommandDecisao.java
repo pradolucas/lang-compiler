@@ -36,7 +36,7 @@ public class CommandDecisao extends AbstractCommand {
 
     @Override
     public String toString() {
-        return "CommandDecisao [condition="+condition+"listaTrue="+listaTrue+"listaFalse="+listaFalse+"]";
+        return "CommandDecisao [condition="+condition+" listaTrue="+listaTrue+" listaFalse="+listaFalse+"]";
     }
     
 }

@@ -1,4 +1,5 @@
-// Generated from GrammarExpression.g4 by ANTLR 4.4
+// Generated from GrammarExpression.g4 by ANTLR 4.13.0
+package compiler.core;
 
 	import symbols.DataType;
 	import symbols.Identifier;
@@ -15,7 +16,6 @@
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -24,186 +24,187 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
+@SuppressWarnings("CheckReturnValue")
 public class GrammarExpressionBaseListener implements GrammarExpressionListener {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTipo(@NotNull GrammarExpressionParser.TipoContext ctx) { }
+	@Override public void enterProg(GrammarExpressionParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTipo(@NotNull GrammarExpressionParser.TipoContext ctx) { }
+	@Override public void exitProg(GrammarExpressionParser.ProgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdescrita(@NotNull GrammarExpressionParser.CmdescritaContext ctx) { }
+	@Override public void enterDeclara(GrammarExpressionParser.DeclaraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdescrita(@NotNull GrammarExpressionParser.CmdescritaContext ctx) { }
+	@Override public void exitDeclara(GrammarExpressionParser.DeclaraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBloco(@NotNull GrammarExpressionParser.BlocoContext ctx) { }
+	@Override public void enterBloco(GrammarExpressionParser.BlocoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBloco(@NotNull GrammarExpressionParser.BlocoContext ctx) { }
+	@Override public void exitBloco(GrammarExpressionParser.BlocoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclara(@NotNull GrammarExpressionParser.DeclaraContext ctx) { }
+	@Override public void enterTipo(GrammarExpressionParser.TipoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclara(@NotNull GrammarExpressionParser.DeclaraContext ctx) { }
+	@Override public void exitTipo(GrammarExpressionParser.TipoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdwhile(@NotNull GrammarExpressionParser.CmdwhileContext ctx) { }
+	@Override public void enterCmd(GrammarExpressionParser.CmdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdwhile(@NotNull GrammarExpressionParser.CmdwhileContext ctx) { }
+	@Override public void exitCmd(GrammarExpressionParser.CmdContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterProg(@NotNull GrammarExpressionParser.ProgContext ctx) { }
+	@Override public void enterCmdleitura(GrammarExpressionParser.CmdleituraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitProg(@NotNull GrammarExpressionParser.ProgContext ctx) { }
+	@Override public void exitCmdleitura(GrammarExpressionParser.CmdleituraContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdif(@NotNull GrammarExpressionParser.CmdifContext ctx) { }
+	@Override public void enterCmdescrita(GrammarExpressionParser.CmdescritaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdif(@NotNull GrammarExpressionParser.CmdifContext ctx) { }
+	@Override public void exitCmdescrita(GrammarExpressionParser.CmdescritaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTermo(@NotNull GrammarExpressionParser.TermoContext ctx) { }
+	@Override public void enterCmdexpr(GrammarExpressionParser.CmdexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTermo(@NotNull GrammarExpressionParser.TermoContext ctx) { }
+	@Override public void exitCmdexpr(GrammarExpressionParser.CmdexprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdexpr(@NotNull GrammarExpressionParser.CmdexprContext ctx) { }
+	@Override public void enterCmdif(GrammarExpressionParser.CmdifContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdexpr(@NotNull GrammarExpressionParser.CmdexprContext ctx) { }
+	@Override public void exitCmdif(GrammarExpressionParser.CmdifContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFator(@NotNull GrammarExpressionParser.FatorContext ctx) { }
+	@Override public void enterCmdwhile(GrammarExpressionParser.CmdwhileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFator(@NotNull GrammarExpressionParser.FatorContext ctx) { }
+	@Override public void exitCmdwhile(GrammarExpressionParser.CmdwhileContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(@NotNull GrammarExpressionParser.ExprContext ctx) { }
+	@Override public void enterExpr(GrammarExpressionParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(@NotNull GrammarExpressionParser.ExprContext ctx) { }
+	@Override public void exitExpr(GrammarExpressionParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmd(@NotNull GrammarExpressionParser.CmdContext ctx) { }
+	@Override public void enterTermo(GrammarExpressionParser.TermoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmd(@NotNull GrammarExpressionParser.CmdContext ctx) { }
+	@Override public void exitTermo(GrammarExpressionParser.TermoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCmdleitura(@NotNull GrammarExpressionParser.CmdleituraContext ctx) { }
+	@Override public void enterFator(GrammarExpressionParser.FatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCmdleitura(@NotNull GrammarExpressionParser.CmdleituraContext ctx) { }
+	@Override public void exitFator(GrammarExpressionParser.FatorContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterEveryRule(@NotNull ParserRuleContext ctx) { }
+	@Override public void enterEveryRule(ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitEveryRule(@NotNull ParserRuleContext ctx) { }
+	@Override public void exitEveryRule(ParserRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitTerminal(@NotNull TerminalNode node) { }
+	@Override public void visitTerminal(TerminalNode node) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void visitErrorNode(@NotNull ErrorNode node) { }
+	@Override public void visitErrorNode(ErrorNode node) { }
 }

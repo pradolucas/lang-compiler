@@ -18,7 +18,10 @@ x = 2.0;
 b = 300+23;
 if (2>=3) {
 a= _key.nextDouble();}else {
-System.out.println(x);}
+System.out.println(x);System.out.println(l);}
 System.out.println(txt);
+d = +2;
+c = +;
+System.out.println(c);
 System.out.println(x);
 }}

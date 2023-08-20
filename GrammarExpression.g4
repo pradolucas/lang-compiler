@@ -37,8 +37,19 @@ grammar GrammarExpression;
 		return ((TokenStream) _input).LT(-1).getText();
 	}
 	public void addId(){
-		//			System.out.println("[TOKEN] "+ lastToken());
 		symbolTable.add(lastToken(), new Identifier(lastToken(), _currentType));
+	}
+	
+	public void	markVarUsed(){
+		symbolTable.get(lastToken()).setUsed();
+	}
+	
+	public void	markVarInitialized(){
+		symbolTable.get(lastToken()).setInitialized();
+	}
+	
+	public void attrExprToId(String Tid, String value){
+		symbolTable.get(Tid).setValue(value);
 	}
 
 	public void checkIdExists(){
@@ -47,21 +58,18 @@ grammar GrammarExpression;
 		}
 	}
 
-	public void attrExprToId(String Tid, String value){
-		symbolTable.get(Tid).setValue(value);
-	}
-
 	public void checkInitialized(){
-		if(symbolTable.get(lastToken()).getValue() == null){
-			throw new SemanticException("Variável " + lastToken() + " não incializada."); 
+		if(!symbolTable.get(lastToken()).getInitialized()){
+			throw new SemanticException("Variável " + lastToken() + " não inicializada."); 
 		}
-		assert true;
 	}
 	
 	public void checkUnused(){
-		//			ERRADO
-		//			symbolTable.getValues().stream().forEach((id)->if(id.getValue() == NULL) throw new SemanticException("Variável " + id.getName() + " não incializada."));
-		assert true;
+		symbolTable.getValues().stream().forEach((id) -> {
+		    if (!id.getUsed()) {
+		        throw new SemanticException("Variável " + id.getName() + " não utilizada.");
+		    }
+		});
 	}
 
 	public void showTokens(){
@@ -200,9 +208,14 @@ cmd
 cmdleitura
 :
 	'leia' AP ID
-	{checkIdExists();}
+	{
+		checkIdExists();
+	}
 
-	{leitura();}
+{
+		leitura();
+		markVarInitialized();	
+	}
 
 	FP
 	{commandLeitura();}
@@ -217,7 +230,7 @@ cmdescrita
 		| ID
 		{
 			checkIdExists();
-//		 	markVarUsed();
+		 	markVarUsed();
 		}
 
 		{escrita();}
@@ -231,6 +244,7 @@ cmdexpr
 	{
 		checkIdExists();
 		exprAtribuicao();
+		markVarInitialized();
 	}
 
 	ATTR
@@ -321,7 +335,11 @@ fator
 	{inputTermo();}
 
 	| ID
-	{checkIdExists(); checkInitialized();}
+	{
+		checkIdExists(); 
+	 	checkInitialized();
+	 	markVarUsed();
+	}
 
 	| AP expr FP
 	| TEXTO
