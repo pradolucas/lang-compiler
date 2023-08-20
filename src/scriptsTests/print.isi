@@ -1,0 +1,10 @@
+programa
+
+	declare STRING txt;
+	
+	txt := "Hello World!";
+	
+	escreva(txt);
+
+	
+fimprog.
