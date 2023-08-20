@@ -140,7 +140,7 @@ public class GrammarExpressionLexer extends Lexer {
 			symbolTable.get(Tid).setValue(value);
 		}
 
-		public void checkIdExists(){
+		public void checkDeclared(){
 			if(!symbolTable.containsKey(lastToken())){
 				throw new SemanticException("Variável não declarada " + lastToken() + "."); 
 			}

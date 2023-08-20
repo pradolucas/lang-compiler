@@ -52,7 +52,7 @@ grammar GrammarExpression;
 		symbolTable.get(Tid).setValue(value);
 	}
 
-	public void checkIdExists(){
+	public void checkDeclared(){
 		if(!symbolTable.containsKey(lastToken())){
 			throw new SemanticException("Variável não declarada " + lastToken() + "."); 
 		}
@@ -209,12 +209,9 @@ cmdleitura
 :
 	'leia' AP ID
 	{
-		checkIdExists();
-	}
-
-{
-		leitura();
+		checkDeclared();
 		markVarInitialized();	
+		leitura();
 	}
 
 	FP
@@ -229,7 +226,7 @@ cmdescrita
 		TEXTO
 		| ID
 		{
-			checkIdExists();
+			checkDeclared();
 		 	markVarUsed();
 		}
 
@@ -242,7 +239,7 @@ cmdexpr
 :
 	ID
 	{
-		checkIdExists();
+		checkDeclared();
 		exprAtribuicao();
 		markVarInitialized();
 	}
@@ -336,12 +333,18 @@ fator
 
 	| ID
 	{
-		checkIdExists(); 
+		checkDeclared(); 
 	 	checkInitialized();
 	 	markVarUsed();
+	 	inputTermo();
 	}
 
-	| AP expr FP
+	| AP
+	{inputTermo();}
+
+	expr FP
+	{inputTermo();}
+
 	| TEXTO
 	{inputTermo();}
 

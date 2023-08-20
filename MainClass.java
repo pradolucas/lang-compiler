@@ -20,8 +20,8 @@ if (2>=3) {
 a= _key.nextDouble();}else {
 System.out.println(x);System.out.println(l);}
 System.out.println(txt);
-d = +2;
-c = +;
+d = a+2;
+c = a+d+(8*2);
 System.out.println(c);
 System.out.println(x);
 }}

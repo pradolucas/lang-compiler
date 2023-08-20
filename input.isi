@@ -24,7 +24,7 @@ programa
 	};
 	
 	d := a + 2;
-	c := a + d;
+	c := a + d + (8*2);
 	escreva(c);
 	
 	do
