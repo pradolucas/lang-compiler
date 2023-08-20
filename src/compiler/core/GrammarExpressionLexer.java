@@ -133,12 +133,10 @@ public class GrammarExpressionLexer extends Lexer {
 		}
 		
 		public void	markVarUsed(){
-			System.out.println("[MARKUSED] "+lastToken());
 			symbolTable.get(lastToken()).setUsed();
 		}
 		
 		public void	markVarInitialized(){
-			System.out.println("[MARKINITIALIZED] "+lastToken());
 			symbolTable.get(lastToken()).setInitialized();
 		}
 		
@@ -150,18 +148,15 @@ public class GrammarExpressionLexer extends Lexer {
 			if(!symbolTable.containsKey(lastToken())){
 				throw new SemanticException("Variável não declarada " + lastToken() + "."); 
 			}
-			System.out.println("[CHECK DECLARED] "+ lastToken());
 		}
 
 		public void checkInitialized(){
 			if(!symbolTable.get(lastToken()).getInitialized()){
 				throw new SemanticException("Variável " + lastToken() + " não inicializada."); 
 			}
-			System.out.println("[CHECK INITIALIZED] "+ lastToken());
 		}
 		
 		public void checkUnused(){
-			showTokens();
 			symbolTable.getValues().stream().forEach((id) -> {
 			    if (!id.getUsed()) {
 			        throw new SemanticException("Variável " + id.getName() + " não utilizada.");
@@ -181,10 +176,10 @@ public class GrammarExpressionLexer extends Lexer {
 		public void commandLeitura(){
 			Identifier var = (Identifier)symbolTable.get(_readID);
 			CommandLeitura cmd = new CommandLeitura(_readID, var);
-			stack.peek().add(cmd); // Toma a última lista com peek, adiciona a ela o comando
+			stack.peek().add(cmd);
 		}
 
-		public void commandEscrita(){
+		public void escrita(){
 			_writeID = lastToken();
 			CommandEscrita cmd = new CommandEscrita(_writeID);
 			stack.peek().add(cmd);
@@ -203,17 +198,23 @@ public class GrammarExpressionLexer extends Lexer {
 			stack.peek().add(cmd);
 		}
 
+		public void listaTrueDecision(){
+			listaTrue = stack.pop();
+		}
+
 		public void listaFalseDecision(){
 			listaFalse = stack.pop();
-		}
-		
-		public void commandIf(){
-			listaTrue = stack.pop();
-			
 			CommandDecisao cmd = new CommandDecisao(_exprDecision, listaTrue, listaFalse);
 			stack.peek().add(cmd);
-			listaFalse = new ArrayList<AbstractCommand>(); // zerando a lista para futuros if
-		};
+		}
+
+		public void listaRepeticao(){
+	        listaCmd = stack.pop();
+			CommandRepeticao cmd = new CommandRepeticao(_exprRepeticao, listaCmd);
+	        stack.peek().add(cmd);
+	    }
+
+
 
 		public void exprDecision(String _content){
 			_exprDecision = String.valueOf(_content);
