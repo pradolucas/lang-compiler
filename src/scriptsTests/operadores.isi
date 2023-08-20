@@ -1,6 +1,6 @@
 programa
 
-	declare NUMERO num1, num2;
+	declare NUMERO num1, num2, resultado;
 	declare STRING txt1, txt2;
 
 	txt1 := "abc";
@@ -17,4 +17,20 @@ programa
     escreva(num2+2);
 	};
 	
+  escreva("Adição: num1 + num2 =");
+  resultado := (num1 + num2);
+  escreva(resultado);
+
+  escreva("Subtração: num1 - num2 =");
+  resultado := (num1 - num2);
+  escreva(resultado);
+
+  escreva("Multiplicação: num1 * num2 =");
+  resultado := (num1 * num2);
+  escreva(resultado);
+
+  escreva("Divisão: num1 / num2 =");
+  resultado := (num1 / num2);
+  escreva(resultado);
+
 fimprog.
