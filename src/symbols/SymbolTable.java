@@ -23,7 +23,7 @@ public class SymbolTable {
 		return symbolTable.values();
 	}
 
-	public ArrayList<Identifier> getAll() {
+	public ArrayList<Identifier> getAll() { // Substituir em programa por getValues
 		ArrayList<Identifier> lista = new ArrayList<Identifier>();
 		for (Identifier symbol : symbolTable.values()) {
 			lista.add(symbol);

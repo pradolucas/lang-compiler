@@ -58,7 +58,8 @@ public class Identifier {
 
 	@Override
 	public String toString() {
-		return "Identifier [name=" + name + ", type=" + type + ", value=" + value + "]";
+		return "Identifier [name=" + name + ", type=" + type + ", value=" + value + ", used=" + used + ", initialized="
+				+ initialized + "]";
 	}
 
 	public String generateJavaCode() {

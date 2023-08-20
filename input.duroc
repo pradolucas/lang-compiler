@@ -1,8 +1,9 @@
 programa
 
-	declare NUMERO x, a, b, c, d;
-	declare STRING txt, l;
+	declare NUMERO a, b, c;
+	declare STRING e, f, g;
 
+	leia(a);
 	leia(b);
 	leia(x);
 	leia(l);
@@ -52,6 +53,26 @@ programa
 		escreva(c);
 	};
 	}while( 13>=23);
+	leia(e);
+	escreva(c);
+	
+	a := 2.0;
+	b := 300+23;
+	e := "abc";
+	
+	se ( 3 <= (3+2)) entao 
+	{ 
+		escreva(f);
+	}
+	senao {
+		c := a + b;
+		f := e;
+	};
+	
+	se ( (10*a) != (45+1)) entao 
+	{ 
+		escreva(g);
+	}
 	
 	
 fimprog.
