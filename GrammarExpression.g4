@@ -31,50 +31,49 @@ grammar GrammarExpression;
 	private ArrayList<AbstractCommand> listaTrue;
 	private ArrayList<AbstractCommand> listaFalse;
 
-	
-	
+
+
 	public String lastToken(){
 		return ((TokenStream) _input).LT(-1).getText();
 	}
 	public void addId(){
-//		System.out.println("[TOKEN] "+ lastToken());
-
+		//			System.out.println("[TOKEN] "+ lastToken());
 		symbolTable.add(lastToken(), new Identifier(lastToken(), _currentType));
 	}
-	
+
 	public void checkIdExists(){
 		if(!symbolTable.containsKey(lastToken())){
 			throw new SemanticException("Variável não declarada " + lastToken() + "."); 
 		}
 	}
-	
+
 	public void attrExprToId(String Tid, String value){
 //		TODO Assegurar o token id, não é last value, pois será o lado direito da expressao. 
 		symbolTable.get(Tid).setValue(value);
 	}
-	
+
 	public void checkInitialized(){
-////		TIP para testes comente essa funcao, a atribuicao de valor (funcao a attrExprToId) n foi implementada
-//		if(symbolTable.get(lastToken()).getValue() == null){
-//			throw new SemanticException("Variável " + lastToken() + " não incializada."); 
-//		}
+//		//			TIP para testes comente essa funcao, a atribuicao de valor (funcao a attrExprToId) n foi implementada
+//					if(symbolTable.get(lastToken()).getValue() == null){
+//						throw new SemanticException("Variável " + lastToken() + " não incializada."); 
+//					}
 		assert true;
 	}
-	
+
 
 	public void checkUnused(){
-//		ERRADO
-//		symbolTable.getValues().stream().forEach((id)->if(id.getValue() == NULL) throw new SemanticException("Variável " + id.getName() + " não incializada."));
+		//			ERRADO
+		//			symbolTable.getValues().stream().forEach((id)->if(id.getValue() == NULL) throw new SemanticException("Variável " + id.getName() + " não incializada."));
 		assert true;
 	}
-	
+
 	public void showTokens(){
 		symbolTable.getValues().stream().forEach((id)->System.out.println(id));
 	}
-	
+
 	public void leitura(){
 		_readID = lastToken();
-		
+
 	}
 
 	public void commandLeitura(){
@@ -125,21 +124,21 @@ grammar GrammarExpression;
 		_exprContent += lastToken();
 	}
 
+
 	public void exibeComandos(){
 		for (AbstractCommand c: program.getComandos()) {
-		System.out.println(c);
-	}
+			System.out.println(c);
+		}
 	}
 
 	public void commandStack(){
 		curThread = new ArrayList<AbstractCommand>();
 		stack.push(curThread);
 	}
-	
+
 	public void generateCode(){
 		program.generateTarget();
 	}
-
 
 }
 
@@ -156,6 +155,7 @@ prog
 		program.setVarTable(symbolTable);
 		program.setComandos(stack.pop());	
 	}
+
 ;
 
 declara
@@ -167,14 +167,15 @@ declara
 		C ID
 		{addId();}
 
-	)* P
+	)* SC
 ;
 
 bloco
 :
 	{commandStack();}
+
 	(
-		cmd P
+		cmd
 	)+
 ;
 
@@ -190,20 +191,25 @@ tipo
 
 cmd
 :
-	cmdleitura
-	| cmdescrita
-	| cmdexpr
-	| cmdif
-	| cmdwhile
+	(
+		cmdleitura
+		| cmdescrita
+		| cmdexpr
+		| cmdif
+		| cmdwhile
+	) SC
 ;
 
 cmdleitura
 :
 	'leia' AP ID
 	{checkIdExists();}
+
 	{leitura();}
 
-	FP	{commandLeitura();}
+	FP
+	{commandLeitura();}
+
 ;
 
 cmdescrita
@@ -213,6 +219,7 @@ cmdescrita
 		TEXTO
 		| ID
 		{checkIdExists();}
+
 		{escrita();}
 
 	) FP
@@ -225,33 +232,43 @@ cmdexpr
 		exprAtribuicao();
 	}
 
-	ATTR {contentAtribuicao();} expr	{commandAtribuicao();}
-//	{attrExprToId(idAttr, );}
+	ATTR
+	{contentAtribuicao();}
+
+	expr
+	{commandAtribuicao();}
+//		{attrExprToId(_exprID, );}
 
 ;
 
 cmdif
 :
-	'se' AP
-	expr {exprDecision();}
-	OP_REL {exprDecisionAcum();}
-	expr {exprDecisionAcum();}
-	FP 
+	'se' AP expr
+	{exprDecision();}
 
-	
-	'entao' AC
+	OP_REL
+	{exprDecisionAcum();}
+
+	expr
+	{exprDecisionAcum();}
+
+	FP 'entao' AC
 	{commandStack();}
+
 	(
 		cmd
 	)+ FC
 	{listaTrueDecision();}
+
 	(
 		'senao' AC
 		{commandStack();}
+
 		(
 			cmd
 		)+ FC
 		{listaFalseDecision();}
+
 	)?
 ;
 
@@ -269,35 +286,44 @@ cmdwhile
 
 expr
 :
-	termo	
+	termo
 	(
 		(
-			OP_SUM 
-			| OP_SUB {inputTermo();}
-			
-		) termo 
-	)*	
+			OP_SUM
+			| OP_SUB
+		)
+		{inputTermo();}
+
+		termo
+	)*
 ;
 
 termo
 :
-	fator	
+	fator
 	(
 		(
-			OP_MULT 
-			| OP_DIV {inputTermo();}
-			
-		) fator 
-	)*	
+			OP_MULT
+			| OP_DIV
+		)
+		{inputTermo();}
+
+		fator
+	)*
 ;
 
 fator
 :
-	NUMBER {inputTermo();}
+	NUMBER
+	{inputTermo();}
+
 	| ID
 	{checkIdExists(); checkInitialized();}
 
-	| AP expr  FC
+	| AP expr FP
+	| TEXTO
+	{inputTermo();}
+
 ;
 
 //---------LEXICO---------
@@ -417,10 +443,7 @@ TEXTO
 :
 	DBQ
 	(
-		[0-9]
-		| [a-z]
-		| [A-Z]
-		| ' '
+		~[DBQ]
 	)+ DBQ
 ;
 

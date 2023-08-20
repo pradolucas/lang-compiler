@@ -119,50 +119,49 @@ public class GrammarExpressionLexer extends Lexer {
 		private ArrayList<AbstractCommand> listaTrue;
 		private ArrayList<AbstractCommand> listaFalse;
 
-		
-		
+
+
 		public String lastToken(){
 			return ((TokenStream) _input).LT(-1).getText();
 		}
 		public void addId(){
-	//		System.out.println("[TOKEN] "+ lastToken());
-
+			//			System.out.println("[TOKEN] "+ lastToken());
 			symbolTable.add(lastToken(), new Identifier(lastToken(), _currentType));
 		}
-		
+
 		public void checkIdExists(){
 			if(!symbolTable.containsKey(lastToken())){
 				throw new SemanticException("Variável não declarada " + lastToken() + "."); 
 			}
 		}
-		
+
 		public void attrExprToId(String Tid, String value){
 	//		TODO Assegurar o token id, não é last value, pois será o lado direito da expressao. 
 			symbolTable.get(Tid).setValue(value);
 		}
-		
+
 		public void checkInitialized(){
-	////		TIP para testes comente essa funcao, a atribuicao de valor (funcao a attrExprToId) n foi implementada
-	//		if(symbolTable.get(lastToken()).getValue() == null){
-	//			throw new SemanticException("Variável " + lastToken() + " não incializada."); 
-	//		}
+	//		//			TIP para testes comente essa funcao, a atribuicao de valor (funcao a attrExprToId) n foi implementada
+	//					if(symbolTable.get(lastToken()).getValue() == null){
+	//						throw new SemanticException("Variável " + lastToken() + " não incializada."); 
+	//					}
 			assert true;
 		}
-		
+
 
 		public void checkUnused(){
-	//		ERRADO
-	//		symbolTable.getValues().stream().forEach((id)->if(id.getValue() == NULL) throw new SemanticException("Variável " + id.getName() + " não incializada."));
+			//			ERRADO
+			//			symbolTable.getValues().stream().forEach((id)->if(id.getValue() == NULL) throw new SemanticException("Variável " + id.getName() + " não incializada."));
 			assert true;
 		}
-		
+
 		public void showTokens(){
 			symbolTable.getValues().stream().forEach((id)->System.out.println(id));
 		}
-		
+
 		public void leitura(){
 			_readID = lastToken();
-			
+
 		}
 
 		public void commandLeitura(){
@@ -213,21 +212,21 @@ public class GrammarExpressionLexer extends Lexer {
 			_exprContent += lastToken();
 		}
 
+
 		public void exibeComandos(){
 			for (AbstractCommand c: program.getComandos()) {
-			System.out.println(c);
-		}
+				System.out.println(c);
+			}
 		}
 
 		public void commandStack(){
 			curThread = new ArrayList<AbstractCommand>();
 			stack.push(curThread);
 		}
-		
+
 		public void generateCode(){
 			program.generateTarget();
 		}
-
 
 
 
@@ -294,23 +293,23 @@ public class GrammarExpressionLexer extends Lexer {
 		"\u0015\u000b\u0017\f\u0019\r\u001b\u000e\u001d\u000f\u001f\u0010!\u0011"+
 		"#\u0012%\u0013\'\u0014)\u0015+\u0016-\u0017/\u00181\u00193\u001a5\u001b"+
 		"7\u001c9\u001d;\u001e\u0001\u0000\u0006\u0002\u0000<<>>\u0001\u0000az"+
-		"\u0003\u000009AZaz\u0001\u000009\u0004\u0000  09AZaz\u0003\u0000\t\n\r"+
-		"\r  \u00dd\u0000\u0001\u0001\u0000\u0000\u0000\u0000\u0003\u0001\u0000"+
-		"\u0000\u0000\u0000\u0005\u0001\u0000\u0000\u0000\u0000\u0007\u0001\u0000"+
-		"\u0000\u0000\u0000\t\u0001\u0000\u0000\u0000\u0000\u000b\u0001\u0000\u0000"+
-		"\u0000\u0000\r\u0001\u0000\u0000\u0000\u0000\u000f\u0001\u0000\u0000\u0000"+
-		"\u0000\u0011\u0001\u0000\u0000\u0000\u0000\u0013\u0001\u0000\u0000\u0000"+
-		"\u0000\u0015\u0001\u0000\u0000\u0000\u0000\u0017\u0001\u0000\u0000\u0000"+
-		"\u0000\u0019\u0001\u0000\u0000\u0000\u0000\u001b\u0001\u0000\u0000\u0000"+
-		"\u0000\u001d\u0001\u0000\u0000\u0000\u0000\u001f\u0001\u0000\u0000\u0000"+
-		"\u0000!\u0001\u0000\u0000\u0000\u0000#\u0001\u0000\u0000\u0000\u0000%"+
-		"\u0001\u0000\u0000\u0000\u0000\'\u0001\u0000\u0000\u0000\u0000)\u0001"+
-		"\u0000\u0000\u0000\u0000+\u0001\u0000\u0000\u0000\u0000-\u0001\u0000\u0000"+
-		"\u0000\u0000/\u0001\u0000\u0000\u0000\u00001\u0001\u0000\u0000\u0000\u0000"+
-		"3\u0001\u0000\u0000\u0000\u00005\u0001\u0000\u0000\u0000\u00007\u0001"+
-		"\u0000\u0000\u0000\u00009\u0001\u0000\u0000\u0000\u0000;\u0001\u0000\u0000"+
-		"\u0000\u0001=\u0001\u0000\u0000\u0000\u0003F\u0001\u0000\u0000\u0000\u0005"+
-		"O\u0001\u0000\u0000\u0000\u0007W\u0001\u0000\u0000\u0000\t^\u0001\u0000"+
+		"\u0003\u000009AZaz\u0001\u000009\u0003\u0000BBDDQQ\u0003\u0000\t\n\r\r"+
+		"  \u00dd\u0000\u0001\u0001\u0000\u0000\u0000\u0000\u0003\u0001\u0000\u0000"+
+		"\u0000\u0000\u0005\u0001\u0000\u0000\u0000\u0000\u0007\u0001\u0000\u0000"+
+		"\u0000\u0000\t\u0001\u0000\u0000\u0000\u0000\u000b\u0001\u0000\u0000\u0000"+
+		"\u0000\r\u0001\u0000\u0000\u0000\u0000\u000f\u0001\u0000\u0000\u0000\u0000"+
+		"\u0011\u0001\u0000\u0000\u0000\u0000\u0013\u0001\u0000\u0000\u0000\u0000"+
+		"\u0015\u0001\u0000\u0000\u0000\u0000\u0017\u0001\u0000\u0000\u0000\u0000"+
+		"\u0019\u0001\u0000\u0000\u0000\u0000\u001b\u0001\u0000\u0000\u0000\u0000"+
+		"\u001d\u0001\u0000\u0000\u0000\u0000\u001f\u0001\u0000\u0000\u0000\u0000"+
+		"!\u0001\u0000\u0000\u0000\u0000#\u0001\u0000\u0000\u0000\u0000%\u0001"+
+		"\u0000\u0000\u0000\u0000\'\u0001\u0000\u0000\u0000\u0000)\u0001\u0000"+
+		"\u0000\u0000\u0000+\u0001\u0000\u0000\u0000\u0000-\u0001\u0000\u0000\u0000"+
+		"\u0000/\u0001\u0000\u0000\u0000\u00001\u0001\u0000\u0000\u0000\u00003"+
+		"\u0001\u0000\u0000\u0000\u00005\u0001\u0000\u0000\u0000\u00007\u0001\u0000"+
+		"\u0000\u0000\u00009\u0001\u0000\u0000\u0000\u0000;\u0001\u0000\u0000\u0000"+
+		"\u0001=\u0001\u0000\u0000\u0000\u0003F\u0001\u0000\u0000\u0000\u0005O"+
+		"\u0001\u0000\u0000\u0000\u0007W\u0001\u0000\u0000\u0000\t^\u0001\u0000"+
 		"\u0000\u0000\u000be\u0001\u0000\u0000\u0000\rj\u0001\u0000\u0000\u0000"+
 		"\u000fr\u0001\u0000\u0000\u0000\u0011u\u0001\u0000\u0000\u0000\u0013{"+
 		"\u0001\u0000\u0000\u0000\u0015\u0081\u0001\u0000\u0000\u0000\u0017\u0084"+
@@ -381,14 +380,14 @@ public class GrammarExpressionLexer extends Lexer {
 		"\u00c4\u00c2\u0001\u0000\u0000\u0000\u00c4\u00c5\u0001\u0000\u0000\u0000"+
 		"\u00c5\u00c7\u0001\u0000\u0000\u0000\u00c6\u00c0\u0001\u0000\u0000\u0000"+
 		"\u00c6\u00c7\u0001\u0000\u0000\u0000\u00c78\u0001\u0000\u0000\u0000\u00c8"+
-		"\u00ca\u0003\'\u0013\u0000\u00c9\u00cb\u0007\u0004\u0000\u0000\u00ca\u00c9"+
+		"\u00ca\u0003\'\u0013\u0000\u00c9\u00cb\b\u0004\u0000\u0000\u00ca\u00c9"+
 		"\u0001\u0000\u0000\u0000\u00cb\u00cc\u0001\u0000\u0000\u0000\u00cc\u00ca"+
 		"\u0001\u0000\u0000\u0000\u00cc\u00cd\u0001\u0000\u0000\u0000\u00cd\u00ce"+
 		"\u0001\u0000\u0000\u0000\u00ce\u00cf\u0003\'\u0013\u0000\u00cf:\u0001"+
 		"\u0000\u0000\u0000\u00d0\u00d1\u0007\u0005\u0000\u0000\u00d1\u00d2\u0001"+
 		"\u0000\u0000\u0000\u00d2\u00d3\u0006\u001d\u0000\u0000\u00d3<\u0001\u0000"+
-		"\u0000\u0000\n\u0000\u00ab\u00b3\u00b6\u00b8\u00be\u00c4\u00c6\u00ca\u00cc"+
-		"\u0001\u0006\u0000\u0000";
+		"\u0000\u0000\t\u0000\u00ab\u00b3\u00b6\u00b8\u00be\u00c4\u00c6\u00cc\u0001"+
+		"\u0006\u0000\u0000";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
