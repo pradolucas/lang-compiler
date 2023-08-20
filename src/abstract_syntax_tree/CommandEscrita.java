@@ -1,22 +1,21 @@
 package abstract_syntax_tree;
 
-public class CommandEscrita extends AbstractCommand{
-    
-    private String id;
+public class CommandEscrita extends AbstractCommand {
 
-    public CommandEscrita (String id) {
-        this.id =id;
-    }
+	private String id;
 
-    @Override
-    public String generateJavaCode() {
-        return "System.out.println("+id+");";
-    }
+	public CommandEscrita(String id) {
+		this.id = id;
+	}
 
-    @Override
-    public String toString() {
-        return "CommandEscrita [id="+id+"]";
-    }
+	@Override
+	public String generateJavaCode() {
+		return "System.out.println(" + id + ");";
+	}
 
+	@Override
+	public String toString() {
+		return "CommandEscrita [id=" + id + "]";
+	}
 
 }

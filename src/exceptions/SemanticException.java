@@ -6,5 +6,3 @@ public class SemanticException extends RuntimeException {
 		super(msg);
 	}
 }
-
-

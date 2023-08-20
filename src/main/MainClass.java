@@ -14,7 +14,7 @@ public class MainClass {
 			// lexer a partir da leitura do arquivo de entrada
 			GrammarExpressionLexer lexer = new GrammarExpressionLexer(CharStreams.fromFileName("input.isi"));
 
-			//TokenStream (o fluxo de tokens) a partir do lexer
+			// TokenStream (o fluxo de tokens) a partir do lexer
 			CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 
 			// Parser a partir do tokenStream
@@ -23,15 +23,15 @@ public class MainClass {
 			System.out.println("Starting file parsing...");
 			parser.prog();
 			System.out.println("Compilation Success!");
-			 parser.showTokens();
-			 parser.exibeComandos();
-			 parser.generateCode();
+			parser.showTokens();
+			parser.exibeComandos();
+			parser.generateCode();
 
 //			System.out.println("------- TARGET --------------");
 //			parser.generateObjectCode();
 		} catch (SemanticException ex) {
 			System.err.println("SEMANTIC ERROR - " + ex.getMessage());
-			ex.printStackTrace();	
+			ex.printStackTrace();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

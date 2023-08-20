@@ -18,14 +18,14 @@ public class SymbolTable {
 	public Identifier add(String key, Identifier value) {
 		return symbolTable.put(key, value);
 	}
-	
+
 	public Collection<Identifier> getValues() {
 		return symbolTable.values();
 	}
 
-	public ArrayList<Identifier> getAll(){
+	public ArrayList<Identifier> getAll() {
 		ArrayList<Identifier> lista = new ArrayList<Identifier>();
-		for (Identifier symbol : symbolTable.values()){
+		for (Identifier symbol : symbolTable.values()) {
 			lista.add(symbol);
 		}
 		return lista;
@@ -34,6 +34,5 @@ public class SymbolTable {
 	public SymbolTable() {
 		this.symbolTable = new HashMap<String, Identifier>();
 	}
-	
-	
+
 }

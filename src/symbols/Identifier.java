@@ -47,7 +47,7 @@ public class Identifier {
 	public void setUsed() {
 		this.used = true;
 	}
-	
+
 	public Boolean getInitialized() {
 		return initialized;
 	}
