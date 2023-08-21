@@ -33,6 +33,30 @@ public class CommandDecisao extends AbstractCommand {
 		return str.toString();
 	}
 
+
+		@Override
+	public String generatePythonCode() {
+		StringBuilder str = new StringBuilder();
+		str.append("if " + condition + " :\n");
+		for (AbstractCommand cmd : listaTrue) {
+			str.append("\t\t"+cmd.generatePythonCode());
+		}
+		
+		if (listaFalse.size() > 0) {
+			str.append("\telse :\n");
+			for (AbstractCommand cmd : listaFalse) {
+				str.append("\t\t"+cmd.generatePythonCode());
+			}
+			
+		}
+
+		return str.toString();
+	}
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "CommandDecisao [condition=" + condition + " listaTrue=" + listaTrue + " listaFalse=" + listaFalse + "]";

@@ -14,6 +14,11 @@ public class CommandEscrita extends AbstractCommand {
 	}
 
 	@Override
+	public String generatePythonCode() {
+		return "print(" + id + ")\n";
+	}
+
+	@Override
 	public String toString() {
 		return "CommandEscrita [id=" + id + "]";
 	}

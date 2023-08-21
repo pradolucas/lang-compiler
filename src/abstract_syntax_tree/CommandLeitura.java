@@ -15,7 +15,11 @@ public class CommandLeitura extends AbstractCommand {
 
 	@Override
 	public String generateJavaCode() {
-		return id + "= _key." + (var.getType() == DataType.NUM ? "nextDouble();" : "nextLine();");
+		return id + "= _key." + (var.getType() == DataType.NUM ? "nextDouble();" : "nextLine();\n");
+	}
+
+	public String generatePythonCode() {
+		return id + " = " + (var.getType() == DataType.NUM ? "float" : "")+"(input())\n";
 	}
 
 	@Override

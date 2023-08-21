@@ -16,6 +16,11 @@ public class CommandAtribuicao extends AbstractCommand {
 	}
 
 	@Override
+	public String generatePythonCode() {
+		return id + " = " + expr + "\n";
+	}
+
+	@Override
 	public String toString() {
 		return "CommandAtribuicao [id=" + id + ", expr=" + expr + "]";
 	}
