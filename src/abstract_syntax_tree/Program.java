@@ -69,6 +69,9 @@ public class Program {
 			str.append("	"+command.generatePythonCode() + "\n");
 		}
 
+		str.append("\nif __name__ == '__main__':\n	main()");
+	
+
 
 		try {
 			FileWriter fr = new FileWriter(new File("MainClass.py"));

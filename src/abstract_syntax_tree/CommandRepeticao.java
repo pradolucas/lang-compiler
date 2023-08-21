@@ -59,7 +59,7 @@ public class CommandRepeticao extends AbstractCommand {
                     str.append("\t\t"+cmd.generatePythonCode());
                 }
 
-                str.append("\n\t\tbreak\n");
+            
             
 
             return str.toString();

@@ -1,6 +1,6 @@
 def main():
-	string contadorTxt;
-	float contador;
+	
+	
 	contadorTxt = "Contador: "
 
 	contador = float(input())
@@ -17,13 +17,12 @@ def main():
 		print(contador)
 		contador = contador+1
 
-		break
-
 	
 	while contador>=0:
 		print(contadorTxt)
 		print(contador)
 		contador = contador-1
 
-		break
 
+if __name__ == '__main__':
+	main()

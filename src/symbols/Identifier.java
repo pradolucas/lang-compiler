@@ -72,12 +72,12 @@ public class Identifier {
 	}
 
 	public String generatePythonCode() {
-		String str;
+		/*String str;
 		if (type == DataType.NUM) {
 			str = "float";
 		} else {
 			str = "string";
-		}
-		return str + " " + name + ";";
+		}*/
+		return "";
 	}
 }
