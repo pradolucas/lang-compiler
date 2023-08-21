@@ -98,7 +98,6 @@ grammar GrammarExpression;
 	}
 
 	public void commandEscrita(String _content) {
-//		_expr = lastToken();
 		CommandEscrita cmd = new CommandEscrita(_content);
 		stack.peek().add(cmd);
 	}
@@ -135,18 +134,22 @@ grammar GrammarExpression;
 
 	public void exprDecision(String _content) {
 		_exprDecision = String.valueOf(_content);
+		newExpr();
 	}
 
 	public void exprDecisionAcum(String _content) {
 		_exprDecision += String.valueOf(_content);
+		newExpr();
 	}
 
 	public void exprRepeticao(String _content) {
 		_exprRepeticao = String.valueOf(_content);
+		newExpr();
 	}
 
 	public void exprRepeticaoAcum(String _content) {
 		_exprRepeticao += String.valueOf(_content);
+		newExpr();
 	}
 
 	public void inputTermo() {
@@ -243,10 +246,8 @@ cmdescrita
 	(
 		expr
 	)
-	
 	{
 		
-		System.out.println("[EXPR] " + _exprContent);
 		commandEscrita(_exprContent);
 		newExpr();
 	}
@@ -280,7 +281,6 @@ cmdif
 	'se' AP expr
 	{
 		exprDecision(_exprContent);
-		newExpr();
 	} // N está avaliando caso expr maior que um termo
 	OP_REL
 	{
@@ -291,7 +291,6 @@ cmdif
 	expr
 	{
 		exprDecisionAcum(_exprContent);
-		newExpr();
 	}
 
 	FP 'entao' AC
@@ -325,27 +324,40 @@ cmdwhile
 
 	//{commandStack();}
 	'while' AP expr
-	{exprRepeticao(_exprContent);}
+	{
+		exprRepeticao(_exprContent);		
+	}
 
 	OP_REL
-	{exprRepeticaoAcum(lastToken()); newExpr();}
+	{exprRepeticaoAcum(lastToken());}
+
+	expr
+	{
+		exprRepeticaoAcum(_exprContent);
+	}
+//{commandStack();}
+	{listaRepeticao("DoWhile");}
+
+	FP
+	| 'while' AP expr
+	{	
+		exprRepeticao(_exprContent);
+	}
+
+	OP_REL
+	{exprRepeticaoAcum(lastToken());}
 
 	expr
 	{exprRepeticaoAcum(_exprContent);}
-	//{commandStack();}
-	{listaRepeticao("DoWhile");}
-	
-    FP	
 
-    |'while' 
-    AP expr {exprRepeticao(_exprContent);}
-    OP_REL {exprRepeticaoAcum(lastToken()); newExpr();}
-    expr {exprRepeticaoAcum(_exprContent);}
-    FP 
-    AC  {commandStack();}
-    (
-        cmd
-    )+ FC   {listaRepeticao("While");}
+	FP AC
+	{commandStack();}
+
+	(
+		cmd
+	)+ FC
+	{listaRepeticao("While");}
+
 ;
 
 expr
