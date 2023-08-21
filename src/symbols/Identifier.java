@@ -70,4 +70,14 @@ public class Identifier {
 		}
 		return str + " " + name + ";";
 	}
+
+	public String generatePythonCode() {
+		String str;
+		if (type == DataType.NUM) {
+			str = "float";
+		} else {
+			str = "string";
+		}
+		return str + " " + name + ";";
+	}
 }

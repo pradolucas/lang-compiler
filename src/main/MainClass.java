@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import compiler.core.GrammarExpressionLexer;
 import compiler.core.GrammarExpressionParser;
 import exceptions.SemanticException;
+import java.util.Scanner;
 
 public class MainClass {
 	public static void main(String[] args) {
@@ -20,6 +21,19 @@ public class MainClass {
 			// Parser a partir do tokenStream
 			GrammarExpressionParser parser = new GrammarExpressionParser(tokenStream);
 
+
+			String lang = "";
+			Scanner _key = new Scanner(System.in);
+
+			
+			do{
+				System.out.println("Escolha compilar para java ou python:");
+				lang = _key.nextLine();
+				System.out.println(lang);
+			}while(! lang.equals("java") && ! lang.equals("python"));
+			
+
+
 			System.out.println("Starting file parsing...");
 			parser.prog();
 			System.out.println("Compilation Success!");
@@ -28,7 +42,7 @@ public class MainClass {
 			System.out.println("------- COMMANDS --------------");
 			parser.exibeComandos();
 			System.out.println("------- TARGET --------------");
-			parser.generateCode();
+			parser.generateCode(lang);
 		} catch (SemanticException ex) {
 			System.err.println("SEMANTIC ERROR - " + ex.getMessage());
 			ex.printStackTrace();

@@ -1,11 +1,11 @@
 programa
 
 	declare NUMERO contador;
-	declare STRING ContadorTxt;
-	ContadorTxt := "Contador: ";
+	declare STRING contadorTxt;
+	contadorTxt := "Contador: ";
 
 	leia(contador);
-	escreva(ContadorTxt);
+	escreva(contadorTxt);
 	escreva(contador);
 	
 	contador := 5;

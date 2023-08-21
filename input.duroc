@@ -1,55 +1,27 @@
 programa
 
-	declare NUMERO x, a, b, c, d;
-	declare STRING txt, l;
+	declare NUMERO contador;
+	declare STRING contadorTxt;
+	contadorTxt := "Contador: ";
 
-	leia(b);
-	leia(x);
-	leia(l);
-	escreva(b);
+	leia(contador);
+	escreva(contadorTxt);
+	escreva(contador);
 	
-	txt := "abc";
-	x := 2.0;
-	b := 300+23;
+	contador := 5;
 	
-	se ((2+4) >= (3+2)) 
-	entao { leia(a);} 
-	senao {
-		escreva(x);
-		escreva(l);
+	while(contador<=10) {
+    escreva(contadorTxt);
+		escreva(contador);
+    contador := contador + 1;
 	};
 	
-	while(3>=2) {
-		escreva(txt);
-	};
-	
-	d = 4+2;
-	c := a + d + (8+2);
-	escreva(c);
-
 	do
 	{
-	escreva(x);
-	}while( 1>=2);
-
-	while(3>=2) {
-		escreva(txt);
-	};
-
-
-	while(3>=2+1) {
-		escreva(txt);
-		escreva(c);
-	};
-
-	do
-	{
-	escreva(x);
-	while((2+1) >= (3*3)) {
-		escreva(txt);
-		escreva(c);
-	};
-	}while( 13>=23);
-	
+	escreva(contadorTxt);
+	escreva(contador);
+  contador := contador - 1;
+	}
+	while(contador>=0);
 	
 fimprog.

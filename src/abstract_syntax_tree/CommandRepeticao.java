@@ -47,6 +47,27 @@ public class CommandRepeticao extends AbstractCommand {
         }
     }
 
+
+
+    @Override
+	public String generatePythonCode() {
+
+
+            StringBuilder str = new StringBuilder();
+                str.append("\n\twhile " + condition + ":\n");
+                for (AbstractCommand cmd : listaCmd) {
+                    str.append("\t\t"+cmd.generatePythonCode());
+                }
+
+                str.append("\n\t\tbreak\n");
+            
+
+            return str.toString();
+    }
+
+
+
+
 	@Override
 	public String toString() {
 		return "CommandDecisao [condition=" + condition + " listaCmd=" + listaCmd +"]";

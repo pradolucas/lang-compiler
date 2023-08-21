@@ -248,8 +248,13 @@ public class GrammarExpressionLexer extends Lexer {
 			stack.push(curThread);
 		}
 
-		public void generateCode(){
-			program.generateTarget();
+		public void generateCode(String lang){
+			if(lang.equals("java")){
+			program.generateTargetJava();
+			}else{
+			program.generateTargetPython();
+			}
+			System.out.println(lang);
 		}
 
 

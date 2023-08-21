@@ -12,7 +12,7 @@ public class Program {
 	private ArrayList<AbstractCommand> comandos;
 	private String programName;
 
-	public void generateTarget() {
+	public void generateTargetJava() {
 		StringBuilder str = new StringBuilder();
 		str.append("import java.util.Scanner;\n");
 		str.append("public class MainClass{\n");
@@ -45,6 +45,53 @@ public class Program {
 		}
 
 	}
+
+
+
+
+
+
+
+
+
+
+	public void generateTargetPython() {
+		StringBuilder str = new StringBuilder();
+		str.append("def main():\n");
+
+
+
+		
+		for (Identifier symbol : varTable.getAll()) {
+			str.append("	"+symbol.generatePythonCode() + "\n");
+		}
+		for (AbstractCommand command : comandos) {
+			str.append("	"+command.generatePythonCode() + "\n");
+		}
+
+
+		try {
+			FileWriter fr = new FileWriter(new File("MainClass.py"));
+			fr.write(str.toString());
+			fr.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public SymbolTable getVarTable() {
 		return varTable;

@@ -1,6 +1,6 @@
 programa
 
-	declare NUMERO num1, num2, resultado;
+	declare NUMERO num1, num2, num3, resultado;
 	declare STRING txt1, txt2;
 
 	txt1 := "abc";
@@ -11,10 +11,12 @@ programa
 	
 	
 	se ((num1+1) >= (num2+2)) 
-	entao { escreva(txt1); escreva(num1+1);} 
+	entao { 
+		escreva(txt1); 
+		escreva(num1+1);} 
 	senao {
 		escreva(txt2);
-    escreva(num2+2);
+	    escreva(num3);
 	};
 	
   escreva("Adição: num1 + num2 =");
