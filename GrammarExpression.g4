@@ -27,6 +27,8 @@ grammar GrammarExpression;
 	private String _readID;
 	private String _writeID;
 	private String _exprID;
+	private DataType _typeID;
+	private String _typeNameID;
 	private String _exprContent;
 	private String _exprDecision;
 	private ArrayList<AbstractCommand> listaTrue;
@@ -75,6 +77,23 @@ grammar GrammarExpression;
 			}
 		});
 	}
+	
+	public void checkOpType() {
+		if(!(_typeID.equals(symbolTable.get(lastToken()).getType()))){
+				throw new SemanticException("Variáveis " + symbolTable.get(lastToken()).getName() + " e " + _typeNameID + " possuem tipos distintos");
+			}
+		 _typeNameID = symbolTable.get(lastToken()).getName();
+		 _typeID = symbolTable.get(lastToken()).getType();
+	}
+	
+	public void checkOpType(String value, DataType dt) {
+		if(!(_typeID.equals(dt))){
+				throw new SemanticException("Variáveis " +  value + " e " + _typeNameID  + " possuem tipos distintos");
+			}
+		 _typeNameID = value;
+		 _typeID = dt;
+	}
+	
 
 	public void showTokens() {
 		symbolTable.getValues().stream().forEach((id) -> System.out.println(id));
@@ -109,6 +128,8 @@ grammar GrammarExpression;
 
 	public void exprAtribuicao() {
 		_exprID = lastToken();
+		_typeNameID = symbolTable.get(lastToken()).getName();
+		_typeID = symbolTable.get(lastToken()).getType();
 	}
 
 	public void newExpr() {
@@ -391,26 +412,30 @@ termo
 fator
 :
 	NUMBER
-	{inputTermo();}
+	{
+		inputTermo();
+		checkOpType(lastToken(), DataType.NUM);
+	}
 
 	| ID
 	{
 		checkDeclared(); 
 	 	checkInitialized();
+	 	checkOpType();
 	 	markVarUsed();
 	 	inputTermo();
 	}
-
-	| AP
-	{inputTermo();}
-
-	expr FP
-	{inputTermo();}
+	| AP	{inputTermo();}
+	expr 
+	FP	{inputTermo();}
 
 	| TEXTO
-	{inputTermo();}
-
+	{
+		inputTermo();
+		checkOpType(lastToken(), DataType.STRING);
+	}
 ;
+
 
 //---------LEXICO---------
 
